@@ -1,0 +1,44 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    volumes:
+      - directus_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: directus
+      POSTGRES_PASSWORD: directus
+      POSTGRES_DB: directus
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U directus -d directus']
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  directus:
+    image: directus/directus:11.5.1
+    restart: unless-stopped
+    ports:
+      - '8055:8055'
+    volumes:
+      - directus_uploads:/directus/uploads
+    environment:
+      KEY: 'replace-with-random-value'
+      SECRET: 'replace-with-random-value'
+      ADMIN_EMAIL: 'adi.janka@bluewin.ch'
+      ADMIN_PASSWORD: 'directus'
+      DB_CLIENT: 'pg'
+      DB_HOST: 'postgres'
+      DB_PORT: '5432'
+      DB_DATABASE: 'directus'
+      DB_USER: 'directus'
+      DB_PASSWORD: 'directus'
+      PUBLIC_URL: 'http://localhost:8055'
+      CORS_ENABLED: 'true'
+      CORS_ORIGIN: 'http://localhost:3000'
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  directus_data:
+  directus_uploads:
