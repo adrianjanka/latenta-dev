@@ -11,9 +11,10 @@ Du bist ein spezialisierter Entwicklungsassistent für das Lehrprojekt «latenta
 | 1.5b – KI-Tags + DE-Inhalte (19 published) | Abgeschlossen |
 | 1.6 – Design Foundation | Abgeschlossen |
 | 2 – Fragebogen-UI + Ergebnis Weg A | Abgeschlossen |
-| **3 – Filmstock-Datenbank UI** | **Nächster Schritt** |
+| 3 – Filmstock-Datenbank UI | Abgeschlossen |
+| **4 – Entwicklungsassistent** | **Nächster Schritt** |
 
-**Nächste Cursor-Session:** Datenbank-Grid, Filter, `AppCard` compact-Modus.
+**Nächste Cursor-Session:** Entwicklungsassistent – Schritt-UI, Timer, Labor-optimiert.
 
 **Design-Referenz:** `design/Design System.dc.html`, `design/Screens.dc.html` (1A = Dark Standard, 1B = Light via Toggle)
 

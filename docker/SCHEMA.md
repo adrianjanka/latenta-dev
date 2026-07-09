@@ -29,8 +29,8 @@ Seed-Daten: [`data/stimmungs-tags.json`](../data/stimmungs-tags.json)
 | `belichtungstoleranz` | enum: `eng`, `normal`, `weit` | |
 | `beschreibung` | text | Kurzbeschreibung (DE, Einsteiger-Sprache) |
 | `beschreibung_en` | text, optional | Original/englische Quellbeschreibung |
-| `bild` | file (image), optional | Später Wikimedia/Unsplash |
-| `bild_quelle` | string, optional | Quellenangabe für Bilder |
+| `bild` | file (image), optional | Produktfoto der Filmrolle |
+| `bild_quelle` | string, optional | Quellenangabe für Rollenfoto |
 | `stimmungs_tags` | m2m → `stimmungs_tags` | Empfehlungslogik |
 | `externe_quelle` | string | z.B. «Film API (MIT)» |
 | `externe_id` | string | Referenz zur Film API |

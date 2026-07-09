@@ -9,18 +9,16 @@ Abgabetermin: **7. August 2026**
 
 ## Aktueller Stand (9. Juli 2026)
 
-**Erledigt:** Phasen 1–1.6 und **2** – Fundament, Datenpipeline, Design Foundation, Fragebogen-UI (Weg A) mit Top-3-Ergebnis.
+**Erledigt:** Phasen 1–2 und **3** – Fundament, Fragebogen (Weg A), Design Foundation, Filmstock-Datenbank UI.
 
-**Nächster Schritt:** Phase 3 – Filmstock-Datenbank UI.
+**Nächster Schritt:** Phase 4 – Entwicklungsassistent.
 
 | Was | Wo nachschlagen |
 |-----|-----------------|
-| Fragebogen-UI | `pages/decision-helper/index.vue`, `components/decision-helper/` |
-| Fragebogen-State | `composables/useQuestionnaire.ts` |
-| Film-API (Matcher) | `server/api/filmstocks.get.ts`, `composables/useFilmRecommendation.ts` |
-| Fragebogen-Daten | `data/questionnaire.ts` |
-| Matcher-Logik | `utils/recommendation.ts` |
-| Design-Referenz | `design/Screens.dc.html` |
+| Datenbank-UI | `pages/database/`, `components/database/` |
+| Filter-Logik | `composables/useFilmstockFilters.ts` |
+| Film-API | `server/api/filmstocks.get.ts`, `server/api/filmstocks/[id].get.ts` |
+| Fragebogen-UI | `pages/decision-helper/`, `components/decision-helper/` |
 | Matcher testen | `npm run test:recommendation` |
 
 ---
@@ -174,7 +172,41 @@ Junction-Felder `filmstocks_stimmungs_tags` hatten `meta: null` → Admin-UI-Feh
 
 **Entscheidungen:** Directus live mit Mock-Fallback; kompakte Ergebnis-Karten; Weg B ausserhalb Scope.
 
-**Nächster Schritt:** Phase 3 – Datenbank-UI
+---
+
+## Phase 3 – Filmstock-Datenbank UI (abgeschlossen)
+
+**Ziel:** Browse-Interface für published Filme mit Filter-Chips und Detailseite.
+
+**Umgesetzt:**
+1. `composables/useFilmstockFilters.ts` – Filter Alle / Farbe / S/W / ISO 100–400
+2. `components/database/` – FilterChips, FilmstockGrid, FilmstockDetail
+3. `pages/database/index.vue` – 2-Spalten-Grid nach Design 1A/1B
+4. `pages/database/[id].vue` – Detailseite mit voller AppCard + Beschreibung
+5. `server/api/filmstocks/[id].get.ts` + `server/utils/filmstocks.ts`
+6. `AppCard` compact/full – Light-Mode mit weiss + Schatten (1B)
+
+**Entscheidungen:** Nur published; kein Vergleichsmodus; Detailseite per Klick.
+
+---
+
+## Phase 3.1 – Datenbank-Filter & Pagination (abgeschlossen)
+
+**Ziel:** Gleichhohe Kacheln, kombinierbare Filter (AND-Logik) und clientseitige Pagination.
+
+**Umgesetzt:**
+1. `composables/useFilmstockFilters.ts` – drei Chip-Zeilen: Typ (Alle/Farbe/S/W), ISO (≤200/400/800+), Charakter (Körnung + Kontrast)
+2. `composables/usePagination.ts` – 12 Filme pro Seite, Reset bei Filterwechsel
+3. `components/database/FilterChips.vue` – mehrzeilige Chips + Trefferzähler
+4. `components/database/Pagination.vue` – Zurück/Weiter + Bereichsanzeige
+5. `components/database/FilmstockGrid.vue` – `auto-rows-fr` + `h-full` für gleichhohe Kacheln
+6. `AppCard` compact – `flex-col h-full`, `line-clamp-2`, Tags im Grid ausgeblendet
+
+**Bildkonzept (für Phase 5):**
+- `bild` / `bild_quelle` = Produktfoto der Filmrolle
+- Beispielbilder (Aufnahmeergebnisse) kommen separat dazu – nicht Teil von 3.1
+
+**Entscheidungen:** Filter kombinierbar (AND über Zeilen); Pagination clientseitig; Bilder bewusst auf Phase 5 verschoben.
 
 ## Design & UX – Roadmap
 
@@ -184,8 +216,10 @@ Junction-Felder `filmstocks_stimmungs_tags` hatten `meta: null` → Admin-UI-Feh
 | 1.5b | KI-Tags + DE-Übersetzung published Filme | Erledigt |
 | **1.6** | Design Tokens, Components, Startseite, Dual-Theme | **Erledigt** |
 | 2 | Fragebogen + Ergebnis im finalen Look | **Erledigt** |
-| 3–4 | Datenbank + Entwicklungsassistent | **Nächster Schritt (Datenbank)** |
-| 5 | Polish, Bilder, Animationen | Geplant |
+| 3 | Datenbank-Grid + Filter + Detailseite | **Erledigt** |
+| 3.1 | Kombinierbare Filter, Pagination, gleichhohe Kacheln | **Erledigt** |
+| 4 | Entwicklungsassistent | **Nächster Schritt** |
+| 5 | Polish, Rollenfotos + Beispielbilder, Animationen | Geplant |
 
 ---
 
@@ -206,7 +240,8 @@ Junction-Felder `filmstocks_stimmungs_tags` hatten `meta: null` → Admin-UI-Feh
 | 2026-07-03 | Directus MCP Pflicht für Schema-Anpassungen | Reproduzierbarkeit, Session-Ende dokumentiert |
 | 2026-07-09 | Dual-Theme: 1A Dark (Standard) + 1B Light (globaler Toggle) | Dunkelkammer-Ästhetik + Labor-Lesbarkeit |
 | 2026-07-09 | Phase 2: Directus-API + Mock-Fallback für Matcher | Echte published Filme, robust bei Ausfall |
-| 2026-07-09 | Kompakte Ergebnis-Karten statt voller AppCard | Entspricht Design Screen 1A Ergebnis |
+| 2026-07-09 | Phase 3: Grid + Filter, Detailseite, nur published | Vergleichsmodus später |
+| 2026-07-09 | Phase 3.1: kombinierbare Filter (AND), Pagination, gleichhohe Kacheln | Bilder (`bild` = Rolle, Beispielbilder Phase 5) |
 
 ---
 
@@ -232,6 +267,14 @@ Design-Tokens und Komponenten wurden direkt aus den Claude-Design-Dateien (`desi
 
 Der Fragebogen nutzt die bestehende Matcher-Logik und lädt Filme serverseitig aus Directus – mit Mock-Fallback für lokale Entwicklung ohne Docker. Die UI folgt dem 1A/1B-Design mit OptionCards, sticky Footer und kompakten Ergebnis-Karten. Weg B (KI) bleibt bewusst für eine spätere Phase.
 
+### Phase 3
+
+Die Datenbank nutzt dieselbe Film-API wie der Matcher. Filter-Chips und 2-Spalten-Grid folgen dem Design; Light-Mode-Karten heben sich bewusst vom Hintergrund ab. Die Detailseite zeigt die volle Charakterkarte – Grundlage für späteren Vergleichsmodus.
+
+### Phase 3.1
+
+Die Filter wurden von einer einfachen Zeile auf drei kombinierbare Gruppen erweitert (Typ, ISO, Charakter) – AND-Logik über die Zeilen hinweg. Pagination (12 pro Seite) hält das Grid bei wachsender Filmzahl übersichtlich. Gleichhohe Kacheln via Flexbox-Layout in Grid und AppCard. Produktfotos der Rolle (`bild`) und separate Beispielbilder bleiben bewusst für Phase 5.
+
 ---
 
 ## Changelog
@@ -245,4 +288,5 @@ Der Fragebogen nutzt die bestehende Matcher-Logik und lädt Filme serverseitig a
 | 2026-07-03 | Phase 1.5b abgeschlossen: 19 Filme KI-angereichert, Directus aktualisiert |
 | 2026-07-03 | M2M-Relation repariert, Session-Ende dokumentiert |
 | 2026-07-09 | Projektumbenennung: Frame & Grain → latenta.dev |
-| 2026-07-09 | Phase 2 abgeschlossen: Fragebogen-UI, Directus-API, Top-3-Ergebnis |
+| 2026-07-09 | Phase 3 abgeschlossen: Datenbank-Grid, Filter, Detailseite |
+| 2026-07-09 | Phase 3.1 abgeschlossen: kombinierbare Filter, Pagination, gleichhohe Kacheln |

@@ -33,17 +33,26 @@ const colorBars = [
   'bg-latenta-evening',
   'bg-latenta-bighorn',
 ]
+const placeholderClass = computed(() =>
+  props.film.typ === 's_w'
+    ? 'bg-[repeating-linear-gradient(135deg,#8a8a8a,#8a8a8a_6px,#7d7d7d_6px,#7d7d7d_12px)]'
+    : 'bg-[repeating-linear-gradient(135deg,#a89484,#a89484_10px,#9c8878_10px,#9c8878_20px)]',
+)
 </script>
 
 <template>
   <article
-    class="overflow-hidden rounded-card bg-latenta-subtle text-latenta-bighorn shadow-lg dark:shadow-black/40"
-    :class="compact ? '' : 'shadow-xl'"
+    class="flex flex-col overflow-hidden rounded-card text-latenta-bighorn"
+    :class="
+      compact
+        ? 'bg-white shadow-[0_4px_10px_rgba(30,21,16,0.06)] dark:bg-latenta-subtle dark:shadow-none'
+        : 'bg-white shadow-[0_4px_14px_rgba(30,21,16,0.08)] dark:bg-latenta-subtle dark:shadow-xl dark:shadow-black/40'
+    "
   >
   <!-- Placeholder image area -->
     <div
-      class="flex items-center justify-center bg-[repeating-linear-gradient(135deg,#a89484,#a89484_10px,#9c8878_10px,#9c8878_20px)] text-center font-mono text-[11px] text-latenta-bighorn"
-      :class="compact ? 'h-[70px]' : 'aspect-[3/2] min-h-[140px]'"
+      class="flex items-center justify-center text-center font-mono text-[11px] text-latenta-bighorn"
+      :class="[placeholderClass, compact ? 'h-[70px]' : 'aspect-[3/2] min-h-[140px]']"
     >
       <span v-if="!compact">FILMSTOCK<br>PRODUKTFOTO</span>
     </div>
@@ -58,7 +67,7 @@ const colorBars = [
       />
     </div>
 
-    <div :class="compact ? 'p-2.5' : 'p-4 sm:p-[18px]'">
+    <div :class="compact ? 'flex flex-1 flex-col p-2.5' : 'p-4 sm:p-[18px]'">
       <p
         v-if="!compact && film.hersteller"
         class="text-xs font-semibold uppercase tracking-wide text-latenta-muted-light"
@@ -67,7 +76,7 @@ const colorBars = [
       </p>
       <h3
         class="font-display uppercase leading-tight text-latenta-bighorn"
-        :class="compact ? 'text-sm' : 'text-xl sm:text-[22px]'"
+        :class="compact ? 'line-clamp-2 min-h-[2.5rem] text-sm' : 'text-xl sm:text-[22px]'"
       >
         {{ film.name }}
       </h3>
@@ -92,7 +101,7 @@ const colorBars = [
 
       <p
         v-else
-        class="mt-0.5 text-[10px] text-latenta-muted-light"
+        class="mt-auto pt-1 text-[10px] text-latenta-muted-light"
       >
         ISO {{ film.iso }} · {{ koernungLabel[film.koernung] }}
       </p>
@@ -114,7 +123,7 @@ const colorBars = [
         </li>
       </ul>
 
-      <div v-if="tags?.length" class="mt-3 flex flex-wrap gap-2">
+      <div v-if="tags?.length && !compact" class="mt-3 flex flex-wrap gap-2">
         <SharedAppTag
           v-for="tag in tags"
           :key="tag"
