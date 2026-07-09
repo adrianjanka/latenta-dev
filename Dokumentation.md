@@ -9,21 +9,19 @@ Abgabetermin: **7. August 2026**
 
 ## Aktueller Stand (9. Juli 2026)
 
-**Umbenennung:** Projekt heisst ab sofort **latenta.dev** (ehemals Frame & Grain).
+**Erledigt:** Phasen 1, 1.5, 1.5b und **1.6** – Fundament, Datenpipeline, KI-Anreicherung, Design Foundation (Tokens, Components, Startseite, Dual-Theme).
 
-**Erledigt:** Phasen 1, 1.5 und 1.5b – Fundament, Fragebogen-Logik, Matcher, Directus-Daten (121 Filme, 19 published), KI-Anreicherung, M2M-Relation repariert.
-
-**Nächster Schritt:** Phase 1.6 – Design Foundation (Adrian: Figma/Claude Design offline), danach Phase 2 Fragebogen-UI.
+**Nächster Schritt:** Phase 2 – Fragebogen-UI + Ergebnis-Screen (Weg A).
 
 | Was | Wo nachschlagen |
 |-----|-----------------|
-| Cursor-Plan Phase 1.6 | `.cursor/plans/phase_1.6_design_foundation.plan.md` |
+| Design-Referenz | `design/Design System.dc.html`, `design/Screens.dc.html` |
+| Design Tokens | `tailwind.config.ts`, `assets/css/main.css` |
+| Shared Components | `components/shared/AppButton.vue`, `AppCard.vue`, `AppTag.vue`, `StepIndicator.vue` |
+| Theme-Toggle | `composables/useTheme.ts`, `components/shared/ThemeToggle.vue` |
 | Directus Schema | `docker/SCHEMA.md` |
 | Fragebogen | `data/questionnaire.ts` |
-| Seed-Daten | `data/filmstocks.enriched.json` |
 | Matcher testen | `npm run test:recommendation` |
-
-**Figma (Adrian):** Moodboard → Key Screens (Start, Fragebogen, Top 3) → Komponenten → URL in diese Datei eintragen.
 
 ---
 
@@ -147,22 +145,21 @@ Junction-Felder `filmstocks_stimmungs_tags` hatten `meta: null` → Admin-UI-Feh
 
 ---
 
-## Phase 1.6 – Design Foundation (ausstehend)
+## Phase 1.6 – Design Foundation (abgeschlossen)
 
 **Ziel:** Visuelles Fundament vor der Fragebogen-UI – nicht im Wireframe-Look bauen.
 
-**Adrian (offline):**
-1. Moodboard (Analog-Ästhetik, warm/material)
-2. Claude Design für erste Exploration → in Figma verfeinern
-3. Key Screens: Startseite, Fragebogen (1 Schritt), Ergebnis Top 3, optional Filmstock-Karte
-4. Komponenten: Button, Card, Tag, StepIndicator
-5. Figma-URL hier eintragen: _noch offen_
+**Design-Quelle:** Claude Design in `design/` (statt Figma-URL).
 
-**Cursor (nächste Session):**
-1. Design Tokens in `tailwind.config.ts`
-2. `components/shared/`: `AppButton`, `AppCard`, `AppTag`, `StepIndicator`
-3. Startseite visuell überarbeiten
-4. → Phase 2: Fragebogen-UI
+**Umgesetzt:**
+1. Design Tokens in `tailwind.config.ts` + semantische CSS-Variablen in `assets/css/main.css`
+2. Fonts: Anton (Headlines) + Inter (UI) via Google Fonts
+3. Dual-Theme: **1A Dunkelkammer** (Standard, `.dark`) + **1B Labormodus** (Light) per globalem Toggle im Header
+4. Shared Components: `AppButton`, `AppCard`, `AppTag`, `StepIndicator`, `ThemeToggle`, `GrainOverlay`
+5. Layout + Startseite nach Screen 1A/1B umgesetzt
+6. `FilmstockPlaceholder` nutzt intern `AppCard`
+
+**Nächster Schritt:** Phase 2 – Fragebogen-UI mit `StepIndicator` + `AppButton`
 
 ---
 
@@ -172,8 +169,8 @@ Junction-Felder `filmstocks_stimmungs_tags` hatten `meta: null` → Admin-UI-Feh
 |-------|--------|--------|
 | 1.5 | UX-Flows, Placeholder-Komponenten | Erledigt |
 | 1.5b | KI-Tags + DE-Übersetzung published Filme | Erledigt |
-| **1.6** | Figma, Design Tokens, Key Screens | **Ausstehend (Adrian)** |
-| 2 | Fragebogen + Ergebnis im finalen Look | Geplant |
+| **1.6** | Design Tokens, Components, Startseite, Dual-Theme | **Erledigt** |
+| 2 | Fragebogen + Ergebnis im finalen Look | **Nächster Schritt** |
 | 3–4 | Datenbank + Entwicklungsassistent | Geplant |
 | 5 | Polish, Bilder, Animationen | Geplant |
 
@@ -194,8 +191,8 @@ Junction-Felder `filmstocks_stimmungs_tags` hatten `meta: null` → Admin-UI-Feh
 | 2026-07-03 | Bilder später, einheitlicher Stil | Fokus auf Logik zuerst |
 | 2026-07-03 | DE-first, kein i18n für MVP | Zielgruppe DE, Film-API ist EN; i18n = Scope-Risiko vor Abgabe |
 | 2026-07-03 | Directus MCP Pflicht für Schema-Anpassungen | Reproduzierbarkeit, Session-Ende dokumentiert |
-| 2026-07-09 | Projektumbenennung zu latenta.dev | Neuer Markenname, technischer Slug latenta-dev |
-| 2026-07-03 | Session-Ende: Phasen 1–1.5b abgeschlossen, Phase 1.6 als Nächstes | Adrian: Figma offline |
+| 2026-07-09 | Dual-Theme: 1A Dark (Standard) + 1B Light (globaler Toggle) | Dunkelkammer-Ästhetik + Labor-Lesbarkeit |
+| 2026-07-09 | Design Foundation aus `design/` statt Figma | Claude Design als Referenz |
 
 ---
 
@@ -213,6 +210,10 @@ Statt das Schema blind zu definieren, wurde zuerst der Fragebogen und die Matchi
 
 Die regelbasierte Tag-Anreicherung lieferte widersprüchliche Ergebnisse – ein klarer Fall für gezielten KI-Einsatz nur bei den 19 published Filmen. `sanitizeTags()` fängt verbleibende Inkonsistenzen ab. Der API-Key bleibt serverseitig im Enrichment-Script (nicht im Frontend). Kosten: ca. 2 Min. Laufzeit für 19 Filme.
 
+### Phase 1.6
+
+Design-Tokens und Komponenten wurden direkt aus den Claude-Design-Dateien (`design/`) abgeleitet. Dual-Theme mit globalem Toggle: 1A (Dunkelkammer) als Standard, 1B (Labor) für bessere Lesbarkeit. Grain-Overlay und Anton-Typografie vermitteln Analog-Ästhetik ohne Bilder. Komponenten-Bibliothek ist bereit für Phase 2 (Fragebogen).
+
 ---
 
 ## Changelog
@@ -226,4 +227,4 @@ Die regelbasierte Tag-Anreicherung lieferte widersprüchliche Ergebnisse – ein
 | 2026-07-03 | Phase 1.5b abgeschlossen: 19 Filme KI-angereichert, Directus aktualisiert |
 | 2026-07-03 | M2M-Relation repariert, Session-Ende dokumentiert |
 | 2026-07-09 | Projektumbenennung: Frame & Grain → latenta.dev |
-| 2026-07-09 | GitHub-Repo → `latenta-dev`, MCP → `latenta.dev directus` |
+| 2026-07-09 | Phase 1.6 abgeschlossen: Design Tokens, Components, Startseite, Dual-Theme |

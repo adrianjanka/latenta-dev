@@ -106,9 +106,9 @@ Details: [docker/SCHEMA.md](docker/SCHEMA.md)
 | Nuxt-Fundament, Directus + Daten | Fragebogen-UI (Phase 2) |
 | Fragebogen-Logik + Matcher (Mock) | KI-Bildanalyse Weg B |
 | Film-API-Pipeline, KI-Anreicherung | Datenbank-UI, Entwicklungsassistent |
-| Placeholder-Komponenten | **Phase 1.6: Figma Design** |
+| Design Foundation (Tokens, Components, Startseite) | |
 
-Nächster Schritt: Design Foundation in Figma, dann Fragebogen-UI. Siehe [Dokumentation.md](Dokumentation.md).
+Nächster Schritt: Phase 2 – Fragebogen-UI. Siehe [Dokumentation.md](Dokumentation.md).
 
 ## Dokumentation
 

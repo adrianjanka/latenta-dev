@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --surface: #E8D4C0;
+  --surface-elevated: #ffffff;
+  --text: #1E1510;
+  --text-muted: #6b5a4a;
+  --text-subtle: #8a7360;
+  --border: rgba(30, 21, 16, 0.12);
+  --border-strong: rgba(30, 21, 16, 0.2);
+  color-scheme: light;
+}
+
+.dark {
+  --surface: #1E1510;
+  --surface-elevated: rgba(232, 212, 192, 0.06);
+  --text: #E8D4C0;
+  --text-muted: #C9A87A;
+  --text-subtle: #C9A87A;
+  --border: rgba(232, 212, 192, 0.15);
+  --border-strong: rgba(232, 212, 192, 0.25);
+  color-scheme: dark;
+}
+
+@layer base {
+  body {
+    @apply bg-surface text-text font-sans antialiased;
+  }
+
+  ::selection {
+    @apply bg-latenta-varnish text-latenta-subtle;
+  }
+}

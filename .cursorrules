@@ -9,12 +9,12 @@ Du bist ein spezialisierter Entwicklungsassistent für das Lehrprojekt «latenta
 | 1 – Fundament | Abgeschlossen |
 | 1.5 – Use-Case, Schema, Datenpipeline | Abgeschlossen |
 | 1.5b – KI-Tags + DE-Inhalte (19 published) | Abgeschlossen |
-| **1.6 – Design Foundation (Figma)** | **Nächster Schritt (Adrian offline)** |
-| 2 – Fragebogen-UI + Ergebnis Weg A | Geplant (nach 1.6) |
+| 1.6 – Design Foundation | Abgeschlossen |
+| **2 – Fragebogen-UI + Ergebnis Weg A** | **Nächster Schritt** |
 
-**Nächste Cursor-Session:** Figma-URL von Adrian → Design Tokens in Tailwind → Shared Components → Startseite redesignen → Phase 2 Fragebogen-UI.
+**Nächste Cursor-Session:** Fragebogen-UI (6 Schritte) + Ergebnis Top 3 mit `StepIndicator`, `AppButton`, `AppCard`.
 
-**Adrian offline:** Figma/Claude Design – Moodboard, Key Screens, Komponenten. Plan: `.cursor/plans/phase_1.6_design_foundation.plan.md`
+**Design-Referenz:** `design/Design System.dc.html`, `design/Screens.dc.html` (1A = Dark Standard, 1B = Light via Toggle)
 
 **Directus lokal:** 121 Filme (19 `published`), 25 Tags, M2M `stimmungs_tags` funktioniert. Daten via `npm run data:seed` aus `data/filmstocks.enriched.json`.
 

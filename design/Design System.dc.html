@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    @keyframes grain {
+      0%, 100% { transform: translate(0,0); }
+      10% { transform: translate(-1%,-2%); }
+      20% { transform: translate(-3%,1%); }
+      30% { transform: translate(2%,-3%); }
+      40% { transform: translate(-2%,3%); }
+      50% { transform: translate(3%,1%); }
+      60% { transform: translate(1%,-1%); }
+      70% { transform: translate(-1%,2%); }
+      80% { transform: translate(2%,2%); }
+      90% { transform: translate(-3%,-1%); }
+    }
+    body { margin: 0; }
+    ::selection { background: #B85C38; color: #E8D4C0; }
+  </style>
+</helmet>
+
+<div style="background:#1E1510; min-height:100vh; font-family:'Inter',sans-serif; color:#E8D4C0; position:relative;">
+
+  <!-- grain overlay -->
+  <div style="position:fixed; inset:0; pointer-events:none; opacity:0.05; z-index:1000; mix-blend-mode:overlay;">
+    <svg width="100%" height="100%">
+      <filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/></filter>
+      <rect width="100%" height="100%" filter="url(#noiseFilter)"/>
+    </svg>
+  </div>
+
+  <!-- HEADER -->
+  <div style="max-width:1200px; margin:0 auto; padding:64px 32px 32px;">
+    <div style="display:flex; align-items:baseline; gap:16px; flex-wrap:wrap;">
+      <div style="font-family:'Anton',sans-serif; font-size:64px; letter-spacing:-0.01em; line-height:0.9; color:#E8D4C0; text-transform:uppercase;">latenta.dev</div>
+      
+    </div>
+    <div style="margin-top:12px; font-size:17px; color:#C9A87A; max-width:640px; line-height:1.5;">Visuelles System für die Analogfotografie-Webapp:<br>Farbe, Type, Komponenten. Referenz für alle drei Kernbereiche: Decision Helper, Filmstock-Datenbank, Entwicklungsassistent.</div>
+  </div>
+
+  <!-- COLORS -->
+  <div style="max-width:1200px; margin:0 auto; padding:32px 32px;">
+    <div style="font-family:'Anton',sans-serif; font-size:28px; text-transform:uppercase; letter-spacing:0.02em; color:#B85C38; margin-bottom:24px; border-bottom:3px solid #B85C38; padding-bottom:12px;">Farbpalette</div>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:20px;">
+
+      <div style="border:1px solid rgba(232,212,192,0.15); border-radius:4px; overflow:hidden;">
+        <div style="height:120px; background:#1E1510; border-bottom:1px solid rgba(232,212,192,0.15);"></div>
+        <div style="padding:16px;">
+          <div style="font-size:13px; text-transform:uppercase; letter-spacing:0.08em; color:#C9A87A; font-weight:600;">Hintergrund dunkel</div>
+          <div style="font-size:15px; margin-top:6px; font-weight:600;">Bighorn Sheep</div>
+          <div style="font-size:13px; color:#C9A87A; margin-top:2px; font-family:monospace;">#1E1510</div>
+          <div style="font-size:12px; color:#C9A87A; margin-top:8px; line-height:1.4;">Hauptgrundton, Dunkelkammer-Charakter</div>
+        </div>
+      </div>
+
+      <div style="border:1px solid rgba(232,212,192,0.15); border-radius:4px; overflow:hidden;">
+        <div style="height:120px; background:#B85C38;"></div>
+        <div style="padding:16px;">
+          <div style="font-size:13px; text-transform:uppercase; letter-spacing:0.08em; color:#C9A87A; font-weight:600;">Primärakzent</div>
+          <div style="font-size:15px; margin-top:6px; font-weight:600;">Gold Varnish Brown</div>
+          <div style="font-size:13px; color:#C9A87A; margin-top:2px; font-family:monospace;">#B85C38</div>
+          <div style="font-size:12px; color:#C9A87A; margin-top:8px; line-height:1.4;">CTAs, aktive Zustände, Fortschritt</div>
+        </div>
+      </div>
+
+      <div style="border:1px solid rgba(232,212,192,0.15); border-radius:4px; overflow:hidden;">
+        <div style="height:120px; background:#C9A87A;"></div>
+        <div style="padding:16px;">
+          <div style="font-size:13px; text-transform:uppercase; letter-spacing:0.08em; color:#C9A87A; font-weight:600;">Sekundärakzent</div>
+          <div style="font-size:15px; margin-top:6px; font-weight:600;">Sugar Pie</div>
+          <div style="font-size:13px; color:#C9A87A; margin-top:2px; font-family:monospace;">#C9A87A</div>
+          <div style="font-size:12px; color:#C9A87A; margin-top:8px; line-height:1.4;">Tags, Hover-States, sek. Buttons</div>
+        </div>
+      </div>
+
+      <div style="border:1px solid rgba(232,212,192,0.15); border-radius:4px; overflow:hidden;">
+        <div style="height:120px; background:#7A7A3D;"></div>
+        <div style="padding:16px;">
+          <div style="font-size:13px; text-transform:uppercase; letter-spacing:0.08em; color:#C9A87A; font-weight:600;">Tertiärakzent</div>
+          <div style="font-size:15px; margin-top:6px; font-weight:600;">Evening Green</div>
+          <div style="font-size:13px; color:#C9A87A; margin-top:2px; font-family:monospace;">#7A7A3D</div>
+          <div style="font-size:12px; color:#C9A87A; margin-top:8px; line-height:1.4;">Kategorie-Kennzeichnung (z.B. S/W)</div>
+        </div>
+      </div>
+
+      <div style="border:1px solid rgba(232,212,192,0.15); border-radius:4px; overflow:hidden;">
+        <div style="height:120px; background:#E8D4C0;"></div>
+        <div style="padding:16px;">
+          <div style="font-size:13px; text-transform:uppercase; letter-spacing:0.08em; color:#C9A87A; font-weight:600;">Heller Kontrast</div>
+          <div style="font-size:15px; margin-top:6px; font-weight:600;">Simply Subtle Pink</div>
+          <div style="font-size:13px; color:#C9A87A; margin-top:2px; font-family:monospace;">#E8D4C0</div>
+          <div style="font-size:12px; color:#C9A87A; margin-top:8px; line-height:1.4;">Text auf Dunkel, helle Oberflächen</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TYPOGRAPHY -->
+  <div style="max-width:1200px; margin:0 auto; padding:48px 32px;">
+    <div style="font-family:'Anton',sans-serif; font-size:28px; text-transform:uppercase; letter-spacing:0.02em; color:#B85C38; margin-bottom:24px; border-bottom:3px solid #B85C38; padding-bottom:12px;">Typografie</div>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:32px;">
+      <div style="border:1px solid rgba(232,212,192,0.15); border-radius:4px; padding:28px;">
+        <div style="font-size:12px; text-transform:uppercase; letter-spacing:0.1em; color:#C9A87A; margin-bottom:16px;">Headline — Anton</div>
+        <div style="font-family:'Anton',sans-serif; font-size:56px; line-height:0.95; text-transform:uppercase; letter-spacing:-0.01em;">Kodak Portra 400</div>
+        <div style="font-family:'Anton',sans-serif; font-size:96px; line-height:0.9; color:#B85C38; margin-top:12px;">ISO 400</div>
+        <div style="font-size:13px; color:#C9A87A; margin-top:16px; line-height:1.5;">Nur für Überschriften, Filmnamen, grosse Zahlen (ISO, Schrittnummern). Fett, kompakt, plakativ.</div>
+      </div>
+      <div style="border:1px solid rgba(232,212,192,0.15); border-radius:4px; padding:28px;">
+        <div style="font-size:12px; text-transform:uppercase; letter-spacing:0.1em; color:#C9A87A; margin-bottom:16px;">UI-Text — Inter</div>
+        <div style="font-size:15px; font-weight:800;">Inter Extrabold — Buttons &amp; Labels</div>
+        <div style="font-size:15px; font-weight:600; margin-top:8px;">Inter Semibold — Subheads</div>
+        <div style="font-size:15px; font-weight:400; margin-top:8px; line-height:1.6;">Inter Regular — Fliesstext. Sehr gut lesbar bei kleinen Grössen, ruhig und neutral im Kontrast zur Headline-Grotesk. Nie unter 14px für Bedienelemente.</div>
+        <div style="font-size:13px; color:#C9A87A; margin-top:16px;">Body min. 14px · Buttons min. 16px</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BUTTONS -->
+  <div style="max-width:1200px; margin:0 auto; padding:48px 32px;">
+    <div style="font-family:'Anton',sans-serif; font-size:28px; text-transform:uppercase; letter-spacing:0.02em; color:#B85C38; margin-bottom:24px; border-bottom:3px solid #B85C38; padding-bottom:12px;">AppButton</div>
+    <div style="display:flex; gap:20px; flex-wrap:wrap; align-items:center;">
+      <button style="height:52px; padding:0 32px; background:#B85C38; color:#E8D4C0; border:none; border-radius:6px; font-family:'Inter',sans-serif; font-size:16px; font-weight:700; cursor:pointer;">Primär: Weiter</button>
+      <button style="height:52px; padding:0 32px; background:transparent; color:#E8D4C0; border:2px solid #E8D4C0; border-radius:6px; font-family:'Inter',sans-serif; font-size:16px; font-weight:700; cursor:pointer;">Sekundär: Zurück</button>
+      <button style="height:52px; padding:0 32px; background:#7A7A3D; color:#1E1510; border:none; border-radius:6px; font-family:'Inter',sans-serif; font-size:16px; font-weight:700; cursor:pointer;">Kategorie: S/W-Filme</button>
+    </div>
+    <div style="font-size:13px; color:#C9A87A; margin-top:16px;">Min. Höhe 48px — grosse Touch-Targets für Entwicklungsassistent (nasse Hände)</div>
+  </div>
+
+  <!-- TAGS -->
+  <div style="max-width:1200px; margin:0 auto; padding:48px 32px;">
+    <div style="font-family:'Anton',sans-serif; font-size:28px; text-transform:uppercase; letter-spacing:0.02em; color:#B85C38; margin-bottom:24px; border-bottom:3px solid #B85C38; padding-bottom:12px;">AppTag</div>
+    <div style="display:flex; gap:12px; flex-wrap:wrap;">
+      <span style="background:#C9A87A; color:#1E1510; padding:8px 18px; border-radius:999px; font-size:14px; font-weight:600;">warm</span>
+      <span style="background:#C9A87A; color:#1E1510; padding:8px 18px; border-radius:999px; font-size:14px; font-weight:600;">porträt</span>
+      <span style="background:#7A7A3D; color:#1E1510; padding:8px 18px; border-radius:999px; font-size:14px; font-weight:600;">s/w</span>
+      <span style="background:#7A7A3D; color:#1E1510; padding:8px 18px; border-radius:999px; font-size:14px; font-weight:600;">draussen</span>
+    </div>
+  </div>
+
+  <!-- STEP INDICATOR -->
+  <div style="max-width:1200px; margin:0 auto; padding:48px 32px;">
+    <div style="font-family:'Anton',sans-serif; font-size:28px; text-transform:uppercase; letter-spacing:0.02em; color:#B85C38; margin-bottom:24px; border-bottom:3px solid #B85C38; padding-bottom:12px;">StepIndicator</div>
+    <div style="display:flex; gap:8px; align-items:center;">
+      <div style="width:36px; height:36px; border-radius:50%; background:#B85C38; color:#E8D4C0; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:14px;">1</div>
+      <div style="width:36px; height:4px; background:#B85C38; border-radius:2px;"></div>
+      <div style="width:36px; height:36px; border-radius:50%; background:#B85C38; color:#E8D4C0; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:14px;">2</div>
+      <div style="width:36px; height:4px; background:#B85C38; border-radius:2px;"></div>
+      <div style="width:36px; height:36px; border-radius:50%; background:#B85C38; color:#E8D4C0; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:14px;">3</div>
+      <div style="width:36px; height:4px; background:rgba(232,212,192,0.2); border-radius:2px;"></div>
+      <div style="width:36px; height:36px; border-radius:50%; background:rgba(232,212,192,0.15); color:#C9A87A; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:14px;">4</div>
+      <div style="width:36px; height:4px; background:rgba(232,212,192,0.2); border-radius:2px;"></div>
+      <div style="width:36px; height:36px; border-radius:50%; background:rgba(232,212,192,0.15); color:#C9A87A; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:14px;">5</div>
+      <div style="width:36px; height:4px; background:rgba(232,212,192,0.2); border-radius:2px;"></div>
+      <div style="width:36px; height:36px; border-radius:50%; background:rgba(232,212,192,0.15); color:#C9A87A; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:14px;">6</div>
+    </div>
+    <div style="font-size:13px; color:#C9A87A; margin-top:16px;">Schritt 3 von 6 — abgeschlossen &amp; aktiv in Gold Varnish Brown, offene Schritte gedimmt</div>
+  </div>
+
+  <!-- CARD -->
+  <div style="max-width:1200px; margin:0 auto; padding:48px 32px 96px;">
+    <div style="font-family:'Anton',sans-serif; font-size:28px; text-transform:uppercase; letter-spacing:0.02em; color:#B85C38; margin-bottom:24px; border-bottom:3px solid #B85C38; padding-bottom:12px;">AppCard — Filmstock</div>
+    <div style="width:300px; background:#E8D4C0; border-radius:10px; overflow:hidden; box-shadow:0 12px 32px rgba(0,0,0,0.4);">
+      <div style="height:200px; background:repeating-linear-gradient(135deg,#a89484,#a89484 10px,#9c8878 10px,#9c8878 20px); display:flex; align-items:center; justify-content:center; font-family:monospace; font-size:11px; color:#1E1510; text-align:center; padding:8px;">FILMSTOCK<br/>PRODUKTFOTO</div>
+      <div style="height:14px; display:flex;">
+        <div style="flex:1; background:#B85C38;"></div>
+        <div style="flex:1; background:#C9A87A;"></div>
+        <div style="flex:1; background:#7A7A3D;"></div>
+        <div style="flex:1; background:#1E1510;"></div>
+      </div>
+      <div style="padding:18px; color:#1E1510;">
+        <div style="font-family:'Anton',sans-serif; font-size:22px; text-transform:uppercase;">Kodak Portra 400</div>
+        <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-top:14px; text-align:center;">
+          <div><div style="font-family:'Anton',sans-serif; font-size:20px; color:#B85C38;">400</div><div style="font-size:11px; text-transform:uppercase; color:#6b5a4a;">ISO</div></div>
+          <div><div style="font-family:'Anton',sans-serif; font-size:20px; color:#B85C38;">Fein</div><div style="font-size:11px; text-transform:uppercase; color:#6b5a4a;">Körnung</div></div>
+          <div><div style="font-family:'Anton',sans-serif; font-size:20px; color:#B85C38;">Sanft</div><div style="font-size:11px; text-transform:uppercase; color:#6b5a4a;">Kontrast</div></div>
+        </div>
+        <div style="display:flex; gap:8px; margin-top:14px; flex-wrap:wrap;">
+          <span style="background:#C9A87A; padding:5px 12px; border-radius:999px; font-size:12px; font-weight:600;">warm</span>
+          <span style="background:#C9A87A; padding:5px 12px; border-radius:999px; font-size:12px; font-weight:600;">porträt</span>
+        </div>
+        <button style="width:100%; margin-top:14px; height:44px; background:#B85C38; color:#E8D4C0; border:none; border-radius:6px; font-weight:700; font-size:14px;">Details ansehen</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</x-dc>
+</body>
+</html>

@@ -1,5 +1,6 @@
 <template>
-  <div class="flex min-h-screen flex-col bg-stone-100 text-stone-900">
+  <div class="relative flex min-h-screen flex-col bg-surface text-text">
+    <SharedGrainOverlay />
     <SharedAppHeader />
     <main class="flex-1">
       <slot />
