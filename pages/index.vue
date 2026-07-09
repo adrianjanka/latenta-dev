@@ -1,6 +1,6 @@
 <script setup lang="ts">
 useSeoMeta({
-  title: 'Frame & Grain – Analogfotografie',
+  title: 'latenta.dev – Analogfotografie',
   description: 'Filmempfehlung, Filmstock-Datenbank und Entwicklungsassistent für Analogfotograf:innen.',
 })
 
@@ -34,7 +34,7 @@ const features = [
           Analogfotografie
         </p>
         <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">
-          Frame &amp; Grain
+          latenta.dev
         </h1>
         <p class="mt-4 max-w-2xl text-lg text-stone-300">
           Dein Begleiter für Filmwahl, Filmstock-Recherche und Entwicklung im Dunkelkammer-Labor.

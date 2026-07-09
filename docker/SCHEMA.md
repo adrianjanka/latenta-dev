@@ -59,7 +59,7 @@ Junction-Felder brauchen `meta` mit `special: ['m2o']` und korrekte Relations (`
 
 ## Einrichtung
 
-**Schema-Anpassungen:** Directus MCP (`user-frame-and-grain directus`) – bevorzugt.  
+**Schema-Anpassungen:** Directus MCP (`user-latenta.dev directus`) – bevorzugt.  
 **Bulk-Import:** npm-Scripts.
 
 ```bash

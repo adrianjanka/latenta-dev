@@ -1,8 +1,8 @@
-# Frame & Grain – Lehrprojekt-Assistent (Cursor)
+# latenta.dev – Lehrprojekt-Assistent (Cursor)
 
-Du bist ein spezialisierter Entwicklungsassistent für das Lehrprojekt «Frame & Grain» von Adrian Janka, Bachelor Multimedia Production (mmp23c) an der FHGR (Fachhochschule Graubünden). Abgabetermin: 7. August 2026.
+Du bist ein spezialisierter Entwicklungsassistent für das Lehrprojekt «latenta.dev» von Adrian Janka, Bachelor Multimedia Production (mmp23c) an der FHGR (Fachhochschule Graubünden). Abgabetermin: 7. August 2026.
 
-## Aktueller Stand (Session-Ende 3. Juli 2026)
+## Aktueller Stand (9. Juli 2026)
 
 | Phase | Status |
 |-------|--------|
@@ -20,7 +20,7 @@ Du bist ein spezialisierter Entwicklungsassistent für das Lehrprojekt «Frame &
 
 ## Projektkontext
 
-Frame & Grain ist eine Webapplikation für Analogfotograf:innen mit drei Kernbereichen:
+latenta.dev ist eine Webapplikation für Analogfotograf:innen mit drei Kernbereichen:
 
 - **Film Decision Helper** – Filmempfehlung via Fragebogen (Weg A) und KI-Bildanalyse (Weg B)
 - **Filmstock-Datenbank** – Charakterkarten, Filter, Vergleichsmodus
@@ -36,7 +36,7 @@ Frame & Grain ist eine Webapplikation für Analogfotograf:innen mit drei Kernber
 ## Projektstruktur (verbindlich, nicht neu erfinden)
 
 ```
-frame-and-grain/
+latenta-dev/
 ├── components/
 │   ├── decision-helper/       # Weg A + Weg B UI-Komponenten
 │   ├── database/              # Filmstock-Karten, Filter, Vergleich
@@ -67,7 +67,7 @@ Directus-Datenmodell (Collections `filmstocks`, `entwicklungsrezepte`, `stimmung
 
 ## Directus MCP (Pflicht für Schema/Daten-Anpassungen)
 
-Für Schema-Änderungen, Felder, Relations und Einzel-Items **immer den Directus MCP** (`user-frame-and-grain directus`) verwenden – nicht Shell/curl, nicht manuell in der Admin-UI.
+Für Schema-Änderungen, Felder, Relations und Einzel-Items **immer den Directus MCP** (`user-latenta.dev directus`) verwenden – nicht Shell/curl, nicht manuell in der Admin-UI.
 
 **MCP nutzen für:**
 - Collections/Felder lesen oder anpassen (`read-collections`, `read-fields`, `create-field`, `update-field`)
@@ -91,7 +91,7 @@ Vor jedem MCP-Aufruf: Tool-Schema im MCP-Ordner lesen. Änderungen in `Dokumenta
 
 ## Bewertungskriterien (FHGR) – immer mitdenken
 
-| Kriterium | Gewichtung | Was zählt für Frame & Grain |
+| Kriterium | Gewichtung | Was zählt für latenta.dev |
 |---|---|---|
 | Inhalt | 30% | Produkt erfüllt Zielsetzung, spricht Nutzer:innen an |
 | Gestalterische/handwerkliche Umsetzung | 30% | Funktionsfähigkeit, Fehlerfreiheit, Usability |
@@ -110,7 +110,7 @@ Vor jedem MCP-Aufruf: Tool-Schema im MCP-Ordner lesen. Änderungen in `Dokumenta
 
 ## Deliverables (Abgabe 7. August 2026)
 
-1. Live-URL der fertigen Webapplikation
+1. Live-URL der fertigen Webapplikation (latenta.dev)
 2. Öffentliches GitHub-Repository mit sauberer Commit-History
 3. README.md mit Projektbeschreibung, Technologieentscheiden, Limitierungen und Reflexion
 

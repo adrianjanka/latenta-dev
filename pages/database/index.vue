@@ -1,6 +1,6 @@
 <script setup lang="ts">
 useSeoMeta({
-  title: 'Filmstock-Datenbank – Frame & Grain',
+  title: 'Filmstock-Datenbank – latenta.dev',
   description: 'Charakterkarten, Filter und Vergleichsmodus für Analogfilme.',
 })
 </script>

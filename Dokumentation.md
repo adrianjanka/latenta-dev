@@ -1,4 +1,4 @@
-# Frame & Grain – Projektdokumentation
+# latenta.dev – Projektdokumentation
 
 Fortlaufendes Entwicklungsjournal für das Lehrprojekt (FHGR, mmp23c).  
 Abgabetermin: **7. August 2026**
@@ -7,7 +7,9 @@ Abgabetermin: **7. August 2026**
 
 ---
 
-## Aktueller Stand (Session-Ende 3. Juli 2026)
+## Aktueller Stand (9. Juli 2026)
+
+**Umbenennung:** Projekt heisst ab sofort **latenta.dev** (ehemals Frame & Grain).
 
 **Erledigt:** Phasen 1, 1.5 und 1.5b – Fundament, Fragebogen-Logik, Matcher, Directus-Daten (121 Filme, 19 published), KI-Anreicherung, M2M-Relation repariert.
 
@@ -94,7 +96,7 @@ Definiert in `data/questionnaire.ts` – 6 Fragen in Einsteiger-Sprache:
 
 ### Directus einrichten
 
-**Schema & Einzelanpassungen:** Directus MCP (`user-frame-and-grain directus`).  
+**Schema & Einzelanpassungen:** Directus MCP (`user-latenta.dev directus`).  
 **Bulk-Import:** npm-Scripts.
 
 ```bash
@@ -192,6 +194,7 @@ Junction-Felder `filmstocks_stimmungs_tags` hatten `meta: null` → Admin-UI-Feh
 | 2026-07-03 | Bilder später, einheitlicher Stil | Fokus auf Logik zuerst |
 | 2026-07-03 | DE-first, kein i18n für MVP | Zielgruppe DE, Film-API ist EN; i18n = Scope-Risiko vor Abgabe |
 | 2026-07-03 | Directus MCP Pflicht für Schema-Anpassungen | Reproduzierbarkeit, Session-Ende dokumentiert |
+| 2026-07-09 | Projektumbenennung zu latenta.dev | Neuer Markenname, technischer Slug latenta-dev |
 | 2026-07-03 | Session-Ende: Phasen 1–1.5b abgeschlossen, Phase 1.6 als Nächstes | Adrian: Figma offline |
 
 ---
@@ -222,3 +225,5 @@ Die regelbasierte Tag-Anreicherung lieferte widersprüchliche Ergebnisse – ein
 | 2026-07-03 | Phase 1.5b geplant: Tag-Qualität + deutsche Inhalte |
 | 2026-07-03 | Phase 1.5b abgeschlossen: 19 Filme KI-angereichert, Directus aktualisiert |
 | 2026-07-03 | M2M-Relation repariert, Session-Ende dokumentiert |
+| 2026-07-09 | Projektumbenennung: Frame & Grain → latenta.dev |
+| 2026-07-09 | GitHub-Repo → `latenta-dev`, MCP → `latenta.dev directus` |

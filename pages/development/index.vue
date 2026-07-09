@@ -1,6 +1,6 @@
 <script setup lang="ts">
 useSeoMeta({
-  title: 'Entwicklungsassistent – Frame & Grain',
+  title: 'Entwicklungsassistent – latenta.dev',
   description: 'Schritt-für-Schritt-Laborbegleitung mit Timer.',
 })
 </script>

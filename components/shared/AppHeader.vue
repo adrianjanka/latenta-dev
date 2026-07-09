@@ -10,7 +10,7 @@ const navItems = [
   <header class="border-b border-stone-200 bg-stone-50">
     <div class="mx-auto flex max-w-5xl items-center justify-between px-4 py-4 sm:px-6">
       <NuxtLink to="/" class="text-lg font-semibold tracking-tight text-stone-900">
-        Frame &amp; Grain
+        latenta.dev
       </NuxtLink>
 
       <nav class="hidden gap-6 sm:flex">

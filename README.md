@@ -1,10 +1,10 @@
-# Frame & Grain
+# latenta.dev
 
 Webapplikation für Analogfotograf:innen – Lehrprojekt Bachelor Multimedia Production (mmp23c), FHGR. Abgabetermin: **7. August 2026**.
 
 ## Über das Projekt
 
-Frame & Grain unterstützt Analogfotograf:innen in drei Bereichen:
+latenta.dev unterstützt Analogfotograf:innen in drei Bereichen:
 
 - **Film Decision Helper** – Filmempfehlung via Fragebogen (Weg A) und KI-Bildanalyse (Weg B)
 - **Filmstock-Datenbank** – Charakterkarten, Filter, Vergleichsmodus
@@ -47,7 +47,7 @@ cp .env.example .env
 docker compose -f docker/docker-compose.yml up -d
 ```
 
-Directus Admin: http://localhost:8055 (`admin@frame-and-grain.local` / `directus`)
+Directus Admin: http://localhost:8055 (`adi.janka@bluewin.ch` / `directus`)
 
 ### 4. Schema & Daten
 
@@ -80,7 +80,7 @@ App: http://localhost:3000
 ## Projektstruktur
 
 ```
-frame-and-grain/
+latenta-dev/
 ├── components/          # UI nach Bereich (decision-helper, database, shared, …)
 ├── composables/         # useDirectus, useFilmRecommendation, …
 ├── data/                # Fragebogen, Tags, enriched JSON
@@ -99,7 +99,7 @@ frame-and-grain/
 
 Details: [docker/SCHEMA.md](docker/SCHEMA.md)
 
-## Aktueller Stand (3. Juli 2026)
+## Aktueller Stand (9. Juli 2026)
 
 | Erledigt | Ausstehend |
 |----------|------------|

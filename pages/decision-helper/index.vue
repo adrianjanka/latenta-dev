@@ -1,6 +1,6 @@
 <script setup lang="ts">
 useSeoMeta({
-  title: 'Film Decision Helper – Frame & Grain',
+  title: 'Film Decision Helper – latenta.dev',
   description: 'Filmempfehlung per Fragebogen oder KI-Bildanalyse.',
 })
 </script>
