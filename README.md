@@ -95,7 +95,7 @@ latenta-dev/
 
 - `filmstocks` – 121 Filme (19 published für Matcher)
 - `stimmungs_tags` – 25 Tags für Empfehlungslogik
-- `entwicklungsrezepte` – Schema vorhanden, Phase 3
+- `entwicklungsrezepte` – 12 published Rezepte (S/W + C-41), `npm run data:seed:recipes`
 
 Details: [docker/SCHEMA.md](docker/SCHEMA.md)
 
@@ -107,7 +107,7 @@ Details: [docker/SCHEMA.md](docker/SCHEMA.md)
 | Filmstock-Datenbank (Grid, Filter, Detail) | KI-Bildanalyse Weg B |
 | Film-API-Pipeline, KI-Anreicherung | Vergleichsmodus Datenbank |
 
-Nächster Schritt: Phase 4 – Entwicklungsassistent. Siehe [Dokumentation.md](Dokumentation.md).
+Nächster Schritt: Phase 5 – Polish. Siehe [Dokumentation.md](Dokumentation.md).
 
 ## Dokumentation
 

@@ -12,13 +12,15 @@ Du bist ein spezialisierter Entwicklungsassistent für das Lehrprojekt «latenta
 | 1.6 – Design Foundation | Abgeschlossen |
 | 2 – Fragebogen-UI + Ergebnis Weg A | Abgeschlossen |
 | 3 – Filmstock-Datenbank UI | Abgeschlossen |
-| **4 – Entwicklungsassistent** | **Nächster Schritt** |
+| 3.1 – Datenbank-Filter & Pagination | Abgeschlossen |
+| **4 – Entwicklungsassistent** | **Abgeschlossen** |
+| **5 – Polish** | **Nächster Schritt** |
 
-**Nächste Cursor-Session:** Entwicklungsassistent – Schritt-UI, Timer, Labor-optimiert.
+**Nächste Cursor-Session:** Phase 5 – Rollenfotos, Beispielbilder, Animationen.
 
 **Design-Referenz:** `design/Design System.dc.html`, `design/Screens.dc.html` (1A = Dark Standard, 1B = Light via Toggle)
 
-**Directus lokal:** 121 Filme (19 `published`), 25 Tags, M2M `stimmungs_tags` funktioniert. Daten via `npm run data:seed` aus `data/filmstocks.enriched.json`.
+**Directus lokal:** 121 Filme (19 `published`), 25 Tags, 12 `entwicklungsrezepte` published. Daten via `npm run data:seed` / `npm run data:seed:recipes`.
 
 ## Projektkontext
 

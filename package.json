@@ -13,6 +13,7 @@
     "data:transform": "tsx scripts/transform-film-api.ts",
     "data:enrich": "tsx scripts/enrich-filmstocks.ts",
     "data:seed": "tsx scripts/seed-directus.ts",
+    "data:seed:recipes": "tsx scripts/seed-development-recipes.ts",
     "data:pipeline": "npm run data:fetch && npm run data:transform && npm run data:enrich",
     "test:recommendation": "tsx scripts/test-recommendation.ts"
   },

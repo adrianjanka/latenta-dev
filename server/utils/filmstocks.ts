@@ -5,6 +5,7 @@ export type FilmstockSource = 'directus' | 'mock'
 
 type DirectusTagRelation =
   | string
+  | number
   | StimmungsTag
   | { stimmungs_tags_id: StimmungsTag | string | null }
 
@@ -14,7 +15,10 @@ export function normalizeTags(raw: unknown): StimmungsTag[] | string[] {
   return raw
     .map((entry: DirectusTagRelation) => {
       if (typeof entry === 'string') return entry
-      if ('slug' in entry && entry.slug) return entry as StimmungsTag
+      if (typeof entry === 'number') return null
+      if (typeof entry === 'object' && entry !== null && 'slug' in entry && entry.slug) {
+        return entry as StimmungsTag
+      }
       if (entry && typeof entry === 'object' && 'stimmungs_tags_id' in entry) {
         const nested = entry.stimmungs_tags_id
         if (!nested) return null

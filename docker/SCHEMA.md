@@ -36,7 +36,7 @@ Seed-Daten: [`data/stimmungs-tags.json`](../data/stimmungs-tags.json)
 | `externe_id` | string | Referenz zur Film API |
 | `status` | enum: `draft`, `published` | Top-30 = published |
 
-## `entwicklungsrezepte` (Schema only, Phase 3)
+## `entwicklungsrezepte`
 
 | Feld | Typ | Zweck |
 |------|-----|-------|
@@ -50,6 +50,8 @@ Seed-Daten: [`data/stimmungs-tags.json`](../data/stimmungs-tags.json)
 | `schritte` | json | Timer-Assistent |
 | `quelle` | string | Pflicht – z.B. «Massive Dev Chart» |
 | `status` | enum: `draft`, `published` | |
+
+Seed: `npm run data:seed:recipes` (aus `data/development-recipes.mock.ts`)
 
 ## M2M-Junction
 

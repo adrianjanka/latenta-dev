@@ -9,9 +9,9 @@ Abgabetermin: **7. August 2026**
 
 ## Aktueller Stand (9. Juli 2026)
 
-**Erledigt:** Phasen 1–2 und **3** – Fundament, Fragebogen (Weg A), Design Foundation, Filmstock-Datenbank UI.
+**Erledigt:** Phasen 1–4 – Fundament, Fragebogen (Weg A), Design Foundation, Filmstock-Datenbank UI, Entwicklungsassistent.
 
-**Nächster Schritt:** Phase 4 – Entwicklungsassistent.
+**Nächster Schritt:** Phase 5 – Polish (Bilder, Animationen).
 
 | Was | Wo nachschlagen |
 |-----|-----------------|
@@ -20,6 +20,8 @@ Abgabetermin: **7. August 2026**
 | Film-API | `server/api/filmstocks.get.ts`, `server/api/filmstocks/[id].get.ts` |
 | Fragebogen-UI | `pages/decision-helper/`, `components/decision-helper/` |
 | Matcher testen | `npm run test:recommendation` |
+| Entwicklungsassistent | `pages/development/`, `components/development-assistant/` |
+| Rezepte seeden | `npm run data:seed:recipes` |
 
 ---
 
@@ -208,6 +210,22 @@ Junction-Felder `filmstocks_stimmungs_tags` hatten `meta: null` → Admin-UI-Feh
 
 **Entscheidungen:** Filter kombinierbar (AND über Zeilen); Pagination clientseitig; Bilder bewusst auf Phase 5 verschoben.
 
+---
+
+## Phase 4 – Entwicklungsassistent (abgeschlossen)
+
+**Ziel:** Schritt-für-Schritt-Laborbegleitung mit Countdown-Timer, mobil optimiert (grosse Touch-Targets, Labormodus 1B).
+
+**Umgesetzt:**
+1. `data/development-recipes.mock.ts` – 12 kuratierte Rezepte (S/W + C-41)
+2. `server/api/development-recipes.get.ts` + `by-film/[filmstockId].get.ts` – Directus/Mock-Fallback
+3. `composables/useDevelopmentFlow.ts` + `useDevelopmentTimer.ts` – Flow-State + Countdown
+4. `components/development-assistant/` – FilmSelector, RecipeSelector, RecipeOverview, DevelopmentTimer, DevelopmentStep, DevelopmentFlow
+5. `pages/development/index.vue` – vollständiger Flow: Film → Rezept → Übersicht → Schritte → Fertig
+6. `scripts/seed-development-recipes.ts` – 12 published Rezepte in Directus (`npm run data:seed:recipes`)
+
+**Entscheidungen:** S/W + C-41; Einstieg nur über `/development` (kein CTA auf Detailseite); Timer pro Schritt mit Pause/Fortsetzen; Wake Lock + Vibration bei Timer-Ende; Quellenangabe sichtbar.
+
 ## Design & UX – Roadmap
 
 | Phase | Inhalt | Status |
@@ -218,8 +236,8 @@ Junction-Felder `filmstocks_stimmungs_tags` hatten `meta: null` → Admin-UI-Feh
 | 2 | Fragebogen + Ergebnis im finalen Look | **Erledigt** |
 | 3 | Datenbank-Grid + Filter + Detailseite | **Erledigt** |
 | 3.1 | Kombinierbare Filter, Pagination, gleichhohe Kacheln | **Erledigt** |
-| 4 | Entwicklungsassistent | **Nächster Schritt** |
-| 5 | Polish, Rollenfotos + Beispielbilder, Animationen | Geplant |
+| 4 | Entwicklungsassistent | **Erledigt** |
+| 5 | Polish, Rollenfotos + Beispielbilder, Animationen | **Nächster Schritt** |
 
 ---
 
@@ -242,6 +260,7 @@ Junction-Felder `filmstocks_stimmungs_tags` hatten `meta: null` → Admin-UI-Feh
 | 2026-07-09 | Phase 2: Directus-API + Mock-Fallback für Matcher | Echte published Filme, robust bei Ausfall |
 | 2026-07-09 | Phase 3: Grid + Filter, Detailseite, nur published | Vergleichsmodus später |
 | 2026-07-09 | Phase 3.1: kombinierbare Filter (AND), Pagination, gleichhohe Kacheln | Bilder (`bild` = Rolle, Beispielbilder Phase 5) |
+| 2026-07-09 | Phase 4: S/W + C-41 Rezepte, nur `/development`, Timer mit Pause | Labor-UX; Seed via `npm run data:seed:recipes` |
 
 ---
 
@@ -275,6 +294,10 @@ Die Datenbank nutzt dieselbe Film-API wie der Matcher. Filter-Chips und 2-Spalte
 
 Die Filter wurden von einer einfachen Zeile auf drei kombinierbare Gruppen erweitert (Typ, ISO, Charakter) – AND-Logik über die Zeilen hinweg. Pagination (12 pro Seite) hält das Grid bei wachsender Filmzahl übersichtlich. Gleichhohe Kacheln via Flexbox-Layout in Grid und AppCard. Produktfotos der Rolle (`bild`) und separate Beispielbilder bleiben bewusst für Phase 5.
 
+### Phase 4
+
+Der Entwicklungsassistent schliesst die dritte Säule des Produkts. Der Flow orientiert sich am Fragebogen-Pattern (sticky Footer, StepIndicator), ist aber auf Labor-Nutzung optimiert: grosser Timer, Pause/Fortsetzen, Wake Lock. Rezepte mit Quellenangabe (Massive Dev Chart, Tetenal/Bellini) decken S/W und C-41 ab. Mock-Fallback und Seed-Script machen die Entwicklung unabhängig von laufendem Directus.
+
 ---
 
 ## Changelog
@@ -290,3 +313,4 @@ Die Filter wurden von einer einfachen Zeile auf drei kombinierbare Gruppen erwei
 | 2026-07-09 | Projektumbenennung: Frame & Grain → latenta.dev |
 | 2026-07-09 | Phase 3 abgeschlossen: Datenbank-Grid, Filter, Detailseite |
 | 2026-07-09 | Phase 3.1 abgeschlossen: kombinierbare Filter, Pagination, gleichhohe Kacheln |
+| 2026-07-09 | Phase 4 abgeschlossen: Entwicklungsassistent mit Timer, 12 Rezepte in Directus |
