@@ -9,18 +9,18 @@ Abgabetermin: **7. August 2026**
 
 ## Aktueller Stand (9. Juli 2026)
 
-**Erledigt:** Phasen 1, 1.5, 1.5b und **1.6** – Fundament, Datenpipeline, KI-Anreicherung, Design Foundation (Tokens, Components, Startseite, Dual-Theme).
+**Erledigt:** Phasen 1–1.6 und **2** – Fundament, Datenpipeline, Design Foundation, Fragebogen-UI (Weg A) mit Top-3-Ergebnis.
 
-**Nächster Schritt:** Phase 2 – Fragebogen-UI + Ergebnis-Screen (Weg A).
+**Nächster Schritt:** Phase 3 – Filmstock-Datenbank UI.
 
 | Was | Wo nachschlagen |
 |-----|-----------------|
-| Design-Referenz | `design/Design System.dc.html`, `design/Screens.dc.html` |
-| Design Tokens | `tailwind.config.ts`, `assets/css/main.css` |
-| Shared Components | `components/shared/AppButton.vue`, `AppCard.vue`, `AppTag.vue`, `StepIndicator.vue` |
-| Theme-Toggle | `composables/useTheme.ts`, `components/shared/ThemeToggle.vue` |
-| Directus Schema | `docker/SCHEMA.md` |
-| Fragebogen | `data/questionnaire.ts` |
+| Fragebogen-UI | `pages/decision-helper/index.vue`, `components/decision-helper/` |
+| Fragebogen-State | `composables/useQuestionnaire.ts` |
+| Film-API (Matcher) | `server/api/filmstocks.get.ts`, `composables/useFilmRecommendation.ts` |
+| Fragebogen-Daten | `data/questionnaire.ts` |
+| Matcher-Logik | `utils/recommendation.ts` |
+| Design-Referenz | `design/Screens.dc.html` |
 | Matcher testen | `npm run test:recommendation` |
 
 ---
@@ -159,9 +159,22 @@ Junction-Felder `filmstocks_stimmungs_tags` hatten `meta: null` → Admin-UI-Feh
 5. Layout + Startseite nach Screen 1A/1B umgesetzt
 6. `FilmstockPlaceholder` nutzt intern `AppCard`
 
-**Nächster Schritt:** Phase 2 – Fragebogen-UI mit `StepIndicator` + `AppButton`
-
 ---
+
+## Phase 2 – Fragebogen-UI + Ergebnis Weg A (abgeschlossen)
+
+**Ziel:** Interaktiver 6-Schritte-Fragebogen mit Matcher und Top-3-Ergebnis im finalen Design.
+
+**Umgesetzt:**
+1. `server/api/filmstocks.get.ts` – published Filme aus Directus, Tag-Normalisierung, Mock-Fallback
+2. `composables/useQuestionnaire.ts` – Schritt-State, Antworten, Navigation
+3. `composables/useFilmRecommendation.ts` – async Laden + Matcher-Anbindung
+4. `components/decision-helper/` – OptionCard, QuestionStep, QuestionnaireFlow, ResultCard, ResultList
+5. `pages/decision-helper/index.vue` – Flow: Fragebogen → Loading → Top 3 / Leer-Fallback
+
+**Entscheidungen:** Directus live mit Mock-Fallback; kompakte Ergebnis-Karten; Weg B ausserhalb Scope.
+
+**Nächster Schritt:** Phase 3 – Datenbank-UI
 
 ## Design & UX – Roadmap
 
@@ -170,8 +183,8 @@ Junction-Felder `filmstocks_stimmungs_tags` hatten `meta: null` → Admin-UI-Feh
 | 1.5 | UX-Flows, Placeholder-Komponenten | Erledigt |
 | 1.5b | KI-Tags + DE-Übersetzung published Filme | Erledigt |
 | **1.6** | Design Tokens, Components, Startseite, Dual-Theme | **Erledigt** |
-| 2 | Fragebogen + Ergebnis im finalen Look | **Nächster Schritt** |
-| 3–4 | Datenbank + Entwicklungsassistent | Geplant |
+| 2 | Fragebogen + Ergebnis im finalen Look | **Erledigt** |
+| 3–4 | Datenbank + Entwicklungsassistent | **Nächster Schritt (Datenbank)** |
 | 5 | Polish, Bilder, Animationen | Geplant |
 
 ---
@@ -192,7 +205,8 @@ Junction-Felder `filmstocks_stimmungs_tags` hatten `meta: null` → Admin-UI-Feh
 | 2026-07-03 | DE-first, kein i18n für MVP | Zielgruppe DE, Film-API ist EN; i18n = Scope-Risiko vor Abgabe |
 | 2026-07-03 | Directus MCP Pflicht für Schema-Anpassungen | Reproduzierbarkeit, Session-Ende dokumentiert |
 | 2026-07-09 | Dual-Theme: 1A Dark (Standard) + 1B Light (globaler Toggle) | Dunkelkammer-Ästhetik + Labor-Lesbarkeit |
-| 2026-07-09 | Design Foundation aus `design/` statt Figma | Claude Design als Referenz |
+| 2026-07-09 | Phase 2: Directus-API + Mock-Fallback für Matcher | Echte published Filme, robust bei Ausfall |
+| 2026-07-09 | Kompakte Ergebnis-Karten statt voller AppCard | Entspricht Design Screen 1A Ergebnis |
 
 ---
 
@@ -214,6 +228,10 @@ Die regelbasierte Tag-Anreicherung lieferte widersprüchliche Ergebnisse – ein
 
 Design-Tokens und Komponenten wurden direkt aus den Claude-Design-Dateien (`design/`) abgeleitet. Dual-Theme mit globalem Toggle: 1A (Dunkelkammer) als Standard, 1B (Labor) für bessere Lesbarkeit. Grain-Overlay und Anton-Typografie vermitteln Analog-Ästhetik ohne Bilder. Komponenten-Bibliothek ist bereit für Phase 2 (Fragebogen).
 
+### Phase 2
+
+Der Fragebogen nutzt die bestehende Matcher-Logik und lädt Filme serverseitig aus Directus – mit Mock-Fallback für lokale Entwicklung ohne Docker. Die UI folgt dem 1A/1B-Design mit OptionCards, sticky Footer und kompakten Ergebnis-Karten. Weg B (KI) bleibt bewusst für eine spätere Phase.
+
 ---
 
 ## Changelog
@@ -227,4 +245,4 @@ Design-Tokens und Komponenten wurden direkt aus den Claude-Design-Dateien (`desi
 | 2026-07-03 | Phase 1.5b abgeschlossen: 19 Filme KI-angereichert, Directus aktualisiert |
 | 2026-07-03 | M2M-Relation repariert, Session-Ende dokumentiert |
 | 2026-07-09 | Projektumbenennung: Frame & Grain → latenta.dev |
-| 2026-07-09 | Phase 1.6 abgeschlossen: Design Tokens, Components, Startseite, Dual-Theme |
+| 2026-07-09 | Phase 2 abgeschlossen: Fragebogen-UI, Directus-API, Top-3-Ergebnis |

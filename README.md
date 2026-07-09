@@ -103,12 +103,12 @@ Details: [docker/SCHEMA.md](docker/SCHEMA.md)
 
 | Erledigt | Ausstehend |
 |----------|------------|
-| Nuxt-Fundament, Directus + Daten | Fragebogen-UI (Phase 2) |
-| Fragebogen-Logik + Matcher (Mock) | KI-Bildanalyse Weg B |
-| Film-API-Pipeline, KI-Anreicherung | Datenbank-UI, Entwicklungsassistent |
-| Design Foundation (Tokens, Components, Startseite) | |
+| Nuxt-Fundament, Directus + Daten | Datenbank-UI (Phase 3) |
+| Fragebogen-Logik + Matcher | KI-Bildanalyse Weg B |
+| Design Foundation + Fragebogen-UI (Weg A) | Entwicklungsassistent |
+| Film-API-Pipeline, KI-Anreicherung | |
 
-Nächster Schritt: Phase 2 – Fragebogen-UI. Siehe [Dokumentation.md](Dokumentation.md).
+Nächster Schritt: Phase 3 – Filmstock-Datenbank UI. Siehe [Dokumentation.md](Dokumentation.md).
 
 ## Dokumentation
 

@@ -10,9 +10,10 @@ Du bist ein spezialisierter Entwicklungsassistent für das Lehrprojekt «latenta
 | 1.5 – Use-Case, Schema, Datenpipeline | Abgeschlossen |
 | 1.5b – KI-Tags + DE-Inhalte (19 published) | Abgeschlossen |
 | 1.6 – Design Foundation | Abgeschlossen |
-| **2 – Fragebogen-UI + Ergebnis Weg A** | **Nächster Schritt** |
+| 2 – Fragebogen-UI + Ergebnis Weg A | Abgeschlossen |
+| **3 – Filmstock-Datenbank UI** | **Nächster Schritt** |
 
-**Nächste Cursor-Session:** Fragebogen-UI (6 Schritte) + Ergebnis Top 3 mit `StepIndicator`, `AppButton`, `AppCard`.
+**Nächste Cursor-Session:** Datenbank-Grid, Filter, `AppCard` compact-Modus.
 
 **Design-Referenz:** `design/Design System.dc.html`, `design/Screens.dc.html` (1A = Dark Standard, 1B = Light via Toggle)
 
