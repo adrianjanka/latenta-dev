@@ -52,6 +52,8 @@ function handleNext() {
 <template>
   <DecisionHelperQuestionStep
     v-if="currentQuestion"
+    :key="currentStep"
+    class="motion-fade-up"
     :step="currentStep"
     :total-steps="totalSteps"
     :question="currentQuestion"

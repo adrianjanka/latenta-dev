@@ -1,4 +1,5 @@
 import {
+  FILMSTOCK_FIELDS,
   getMockFilmstockById,
   normalizeFilmstock,
   type FilmstockSource,
@@ -31,7 +32,7 @@ export default defineEventHandler(async (event): Promise<FilmstockResponse> => {
 
   try {
     const params = new URLSearchParams({
-      'fields': '*,stimmungs_tags.stimmungs_tags_id.*',
+      'fields': FILMSTOCK_FIELDS,
     })
 
     const response = await $fetch<{ data: Record<string, unknown> }>(

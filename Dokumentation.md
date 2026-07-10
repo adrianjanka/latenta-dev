@@ -7,11 +7,11 @@ Abgabetermin: **7. August 2026**
 
 ---
 
-## Aktueller Stand (9. Juli 2026)
+## Aktueller Stand (10. Juli 2026)
 
-**Erledigt:** Phasen 1–4 – Fundament, Fragebogen (Weg A), Design Foundation, Filmstock-Datenbank UI, Entwicklungsassistent.
+**Erledigt:** Phasen 1–5B – inkl. Bild-Infrastruktur und Motion/Polish.
 
-**Nächster Schritt:** Phase 5 – Polish (Bilder, Animationen).
+**Nächster Schritt:** Restliche Rollenfotos seeden (`npm run data:seed:images -- --limit=2`, Unsplash 50/h); optional Weg B / Vergleichsmodus.
 
 | Was | Wo nachschlagen |
 |-----|-----------------|
@@ -22,6 +22,8 @@ Abgabetermin: **7. August 2026**
 | Matcher testen | `npm run test:recommendation` |
 | Entwicklungsassistent | `pages/development/`, `components/development-assistant/` |
 | Rezepte seeden | `npm run data:seed:recipes` |
+| Bilder seeden | `npm run data:seed:images` (Unsplash → Directus) |
+| Asset-URLs | `composables/useDirectusAsset.ts` |
 
 ---
 
@@ -226,6 +228,41 @@ Junction-Felder `filmstocks_stimmungs_tags` hatten `meta: null` → Admin-UI-Feh
 
 **Entscheidungen:** S/W + C-41; Einstieg nur über `/development` (kein CTA auf Detailseite); Timer pro Schritt mit Pause/Fortsetzen; Wake Lock + Vibration bei Timer-Ende; Quellenangabe sichtbar.
 
+## Phase 5A – Bild-Infrastruktur (abgeschlossen)
+
+**Ziel:** Rollenfotos + Beispielaufnahmen anzeigbar machen; Inhalte aus lizenzfreien Stock-Quellen (Unsplash) nach Directus importieren.
+
+**Umgesetzt:**
+1. Directus: `beispielbilder` (files) + Junction `filmstocks_beispielbilder` (via `npm run directus:setup`)
+2. `composables/useDirectusAsset.ts` – Asset-URLs mit optionalen Transforms
+3. `AppCard` zeigt `bild` (Fallback Placeholder) + `bild_quelle`; Detailseite Galerie «Beispielaufnahmen»
+4. API/`normalizeFilmstock` laden und normalisieren `bild` + `beispielbilder`
+5. Manifest `data/filmstock-images.manifest.json` + Seed `npm run data:seed:images`
+
+**Entscheidungen:** Unsplash API (Attribution Pflicht) → Import nach Directus (kein Hotlinking); Rollenfoto = `bild`/`bild_quelle`; Look-Beispiele = `beispielbilder` (Attribution in File-`description`); Animationen = Phase 5B.
+
+**Seed ausführen:** `UNSPLASH_ACCESS_KEY` in `.env` setzen, dann gestaffelt wegen 50 Requests/h:
+
+```bash
+npm run data:seed:images -- --limit=2
+```
+
+Pro Film ~6 Unsplash-Calls; bei Rate-Limit bricht das Script ab. Nach ~1 h erneut (idempotent). `bild` braucht die Relation zu `directus_files` (`npm run directus:setup`).
+
+## Phase 5B – Animationen (abgeschlossen)
+
+**Ziel:** Zurückhaltende Motion für Hierarchie und Präsenz – Analog-Ästhetik, kein UI-Lärm.
+
+**Umgesetzt:**
+1. Motion-Tokens + Keyframes in `assets/css/main.css` (`fade-up`, `fade-in`, `grain-drift`)
+2. Page-Transition (`app.vue` + `.page-*`)
+3. Gestaffelte Karten (Home, Filmstock-Grid, Beispielgalerie)
+4. Bild-Reveal in `AppCard` beim Laden
+5. Grain-Drift (Dark), StepIndicator-Farbübergänge, Fragebogen-Schritt-Fade
+6. `prefers-reduced-motion: reduce` deaktiviert Animationen
+
+**Entscheidungen:** Wenige, bewusste Motionen statt überall Transition; reduced-motion first-class.
+
 ## Design & UX – Roadmap
 
 | Phase | Inhalt | Status |
@@ -237,7 +274,8 @@ Junction-Felder `filmstocks_stimmungs_tags` hatten `meta: null` → Admin-UI-Feh
 | 3 | Datenbank-Grid + Filter + Detailseite | **Erledigt** |
 | 3.1 | Kombinierbare Filter, Pagination, gleichhohe Kacheln | **Erledigt** |
 | 4 | Entwicklungsassistent | **Erledigt** |
-| 5 | Polish, Rollenfotos + Beispielbilder, Animationen | **Nächster Schritt** |
+| 5A | Bild-Infrastruktur (Rollenfotos + Beispielbilder + Unsplash-Seed) | **Erledigt** |
+| 5B | Animationen / Micro-Interactions | **Erledigt** |
 
 ---
 
@@ -261,6 +299,10 @@ Junction-Felder `filmstocks_stimmungs_tags` hatten `meta: null` → Admin-UI-Feh
 | 2026-07-09 | Phase 3: Grid + Filter, Detailseite, nur published | Vergleichsmodus später |
 | 2026-07-09 | Phase 3.1: kombinierbare Filter (AND), Pagination, gleichhohe Kacheln | Bilder (`bild` = Rolle, Beispielbilder Phase 5) |
 | 2026-07-09 | Phase 4: S/W + C-41 Rezepte, nur `/development`, Timer mit Pause | Labor-UX; Seed via `npm run data:seed:recipes` |
+| 2026-07-10 | Phase 5A: Unsplash → Directus Files, kein Hotlinking | Lizenz/Attribution FHGR; Offline-fähig via CMS |
+| 2026-07-10 | `beispielbilder` als files-Relation | Mehrere Looks pro Film; Quelle in File-description |
+| 2026-07-10 | Seed gestaffelt (`--limit`), Rate-Limit-Abbruch | Unsplash Demo 50 Requests/h |
+| 2026-07-10 | Phase 5B: sparsame Motion + reduced-motion | Hierarchie ohne UI-Lärm |
 
 ---
 
@@ -298,6 +340,14 @@ Die Filter wurden von einer einfachen Zeile auf drei kombinierbare Gruppen erwei
 
 Der Entwicklungsassistent schliesst die dritte Säule des Produkts. Der Flow orientiert sich am Fragebogen-Pattern (sticky Footer, StepIndicator), ist aber auf Labor-Nutzung optimiert: grosser Timer, Pause/Fortsetzen, Wake Lock. Rezepte mit Quellenangabe (Massive Dev Chart, Tetenal/Bellini) decken S/W und C-41 ab. Mock-Fallback und Seed-Script machen die Entwicklung unabhängig von laufendem Directus.
 
+### Phase 5A
+
+Bilder kommen bewusst über Directus (nicht per Hotlink), damit Attribution, Offline-Fähigkeit und Deployment stabil bleiben. Unsplash liefert lizenzfreie Motive; die Suchbegriffe im Manifest steuern Look vs. Rollenfoto. Die UI fällt ohne Bilder auf die bisherigen Placeholder zurück – Progressive Enhancement. Rate-Limit (50/h) erzwingt gestaffeltes Seeden (`--limit=2`).
+
+### Phase 5B
+
+Motion bleibt sparsam: Page-Fade, gestaffelte Karten, Bild-Reveal und dezenter Grain. `prefers-reduced-motion` ist Pflicht für Usability und Bewertung (Gestaltung/Handwerk).
+
 ---
 
 ## Changelog
@@ -314,3 +364,6 @@ Der Entwicklungsassistent schliesst die dritte Säule des Produkts. Der Flow ori
 | 2026-07-09 | Phase 3 abgeschlossen: Datenbank-Grid, Filter, Detailseite |
 | 2026-07-09 | Phase 3.1 abgeschlossen: kombinierbare Filter, Pagination, gleichhohe Kacheln |
 | 2026-07-09 | Phase 4 abgeschlossen: Entwicklungsassistent mit Timer, 12 Rezepte in Directus |
+| 2026-07-10 | Phase 5A: beispielbilder-Schema, Asset-Helper, AppCard/Detail, Unsplash-Seed |
+| 2026-07-10 | `bild`→`directus_files`-Relation; Seed mit `--limit` wegen Unsplash 50/h |
+| 2026-07-10 | Phase 5B: Page-Transition, Stagger, Bild-Reveal, Grain, reduced-motion |

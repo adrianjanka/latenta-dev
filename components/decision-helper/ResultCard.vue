@@ -61,15 +61,15 @@ const primaryReason = computed(() => {
         :class="bar"
       />
     </div>
-    <div class="p-4">
+    <div class="p-5">
       <h3 class="font-display text-xl uppercase leading-tight">
         {{ recommendation.filmstock.hersteller }}
         {{ recommendation.filmstock.name }}
       </h3>
-      <p class="mt-1.5 text-[13px] leading-relaxed text-latenta-muted-light">
+      <p class="mt-2.5 text-[13px] leading-relaxed text-latenta-muted-light">
         {{ primaryReason }}
       </p>
-      <div v-if="displayTags.length" class="mt-2.5 flex flex-wrap gap-2">
+      <div v-if="displayTags.length" class="mt-3.5 flex flex-wrap gap-2">
         <SharedAppTag
           v-for="tag in displayTags"
           :key="tag"

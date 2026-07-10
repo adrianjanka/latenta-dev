@@ -1,4 +1,5 @@
 import {
+  FILMSTOCK_FIELDS,
   getMockFilmstocks,
   normalizeFilmstock,
   type FilmstockSource,
@@ -22,7 +23,7 @@ export default defineEventHandler(async (): Promise<FilmstocksResponse> => {
   try {
     const params = new URLSearchParams({
       'filter[status][_eq]': 'published',
-      'fields': '*,stimmungs_tags.stimmungs_tags_id.*',
+      'fields': FILMSTOCK_FIELDS,
       'limit': '-1',
     })
 

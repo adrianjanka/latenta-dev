@@ -13,6 +13,8 @@ export type StimmungsTagKategorie = 'licht' | 'stimmung' | 'motiv' | 'aesthetik'
 export interface DirectusFile {
   id: string
   filename_download?: string
+  title?: string | null
+  description?: string | null
 }
 
 export interface StimmungsTag {
@@ -43,6 +45,8 @@ export interface Filmstock {
   beschreibung_en?: string | null
   bild?: string | DirectusFile | null
   bild_quelle?: string | null
+  /** Beispielaufnahmen (Look) – Attribution in File-description */
+  beispielbilder?: DirectusFile[] | null
   stimmungs_tags?: StimmungsTag[] | string[]
   externe_quelle?: string | null
   externe_id?: string | null

@@ -41,20 +41,20 @@ const chips: { value: TypFilter, label: string }[] = [
 </script>
 
 <template>
-  <div class="mx-auto max-w-lg px-6 pb-12 pt-6 sm:px-8">
+  <div class="mx-auto max-w-lg px-6 pb-16 pt-8 sm:px-8 sm:pt-10">
     <h1 class="font-display text-[2rem] uppercase leading-none text-text">
       Film wählen
     </h1>
-    <p class="mt-3 text-sm text-text-muted">
+    <p class="mt-4 text-sm text-text-muted">
       Welchen Film entwickelst du heute?
     </p>
 
-    <div class="mt-4 flex flex-wrap gap-2">
+    <div class="mt-6 flex flex-wrap gap-2.5">
       <button
         v-for="chip in chips"
         :key="chip.value"
         type="button"
-        class="shrink-0 rounded-full px-4 py-2 text-[13px] font-semibold transition"
+        class="shrink-0 rounded-full px-4 py-2.5 text-[13px] font-semibold transition"
         :class="
           typFilter === chip.value
             ? 'bg-latenta-varnish text-latenta-subtle'
@@ -66,12 +66,12 @@ const chips: { value: TypFilter, label: string }[] = [
       </button>
     </div>
 
-    <div class="mt-5 flex flex-col gap-3">
+    <div class="mt-6 flex flex-col gap-3.5">
       <button
         v-for="film in filteredFilms"
         :key="film.id"
         type="button"
-        class="flex w-full items-center justify-between rounded-card border-[1.5px] p-4 text-left transition"
+        class="flex w-full items-center justify-between rounded-card border-[1.5px] p-5 text-left transition"
         :class="
           hasRecipes(film.id)
             ? 'border-border-strong bg-surface-elevated hover:opacity-90 dark:border-border'

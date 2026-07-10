@@ -13,15 +13,15 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <div class="mx-auto max-w-lg px-6 pb-12 pt-6 sm:px-8">
+  <div class="mx-auto max-w-lg px-6 pb-16 pt-8 sm:px-8 sm:pt-10">
     <p class="text-xs font-semibold uppercase tracking-[0.12em] text-latenta-varnish dark:text-text-muted">
       Deine Empfehlung
     </p>
-    <h2 class="mt-2 font-display text-4xl uppercase leading-none text-text">
+    <h2 class="mt-3 font-display text-4xl uppercase leading-none text-text">
       Top 3 Filme
     </h2>
 
-    <div class="mt-6 flex flex-col gap-4">
+    <div class="mt-8 flex flex-col gap-5">
       <DecisionHelperResultCard
         v-for="(rec, index) in recommendations"
         :key="rec.filmstock.id"
@@ -31,7 +31,7 @@ const emit = defineEmits<{
       />
     </div>
 
-    <div class="mt-6 flex flex-col gap-3">
+    <div class="mt-10 flex flex-col gap-3.5">
       <SharedAppButton to="/database" variant="secondary" class="w-full">
         Zur Datenbank
       </SharedAppButton>

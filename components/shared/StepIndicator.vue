@@ -17,7 +17,7 @@ const steps = computed(() => Array.from({ length: props.total }, (_, i) => i + 1
     <div class="flex items-center gap-1.5 sm:gap-2">
       <template v-for="step in steps" :key="step">
         <div
-          class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-extrabold sm:h-9 sm:w-9 sm:text-sm"
+          class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-extrabold transition-colors duration-300 sm:h-9 sm:w-9 sm:text-sm"
           :class="
             step <= current
               ? 'bg-latenta-varnish text-latenta-subtle'
@@ -28,7 +28,7 @@ const steps = computed(() => Array.from({ length: props.total }, (_, i) => i + 1
         </div>
         <div
           v-if="step < total"
-          class="h-1 w-5 rounded-sm sm:w-6"
+          class="h-1 w-5 rounded-sm transition-colors duration-300 sm:w-6"
           :class="step < current ? 'bg-latenta-varnish' : 'bg-border-strong'"
         />
       </template>

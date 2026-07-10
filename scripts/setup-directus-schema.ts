@@ -123,7 +123,7 @@ async function setupFilmstocks() {
           },
           { field: 'beschreibung', type: 'text', meta: { interface: 'input-multiline' }, schema: {} },
           { field: 'beschreibung_en', type: 'text', meta: { interface: 'input-multiline', note: 'Original EN' }, schema: {} },
-          { field: 'bild', type: 'uuid', meta: { interface: 'file-image', special: ['file'] }, schema: {} },
+          { field: 'bild', type: 'uuid', meta: { interface: 'file-image', special: ['file'], display: 'image' }, schema: {} },
           { field: 'bild_quelle', type: 'string', meta: { interface: 'input' }, schema: {} },
           { field: 'externe_quelle', type: 'string', meta: { interface: 'input' }, schema: {} },
           { field: 'externe_id', type: 'string', meta: { interface: 'input' }, schema: {} },
@@ -147,6 +147,9 @@ async function setupFilmstocks() {
   else {
     console.log(`Collection ${name} existiert bereits`)
   }
+
+  await ensureBildFileRelation()
+  await setupBeispielbilderFiles()
 
   // Junction-Collection zuerst (M2M braucht Junction + Relations vor dem Alias-Feld)
   const junction = 'filmstocks_stimmungs_tags'
@@ -281,6 +284,145 @@ async function repairM2mRelations() {
     }),
   })
   console.log('M2M-Relation OK')
+}
+
+/** file-Relation für Rollenfoto (Admin-UI braucht FK auf directus_files) */
+async function ensureBildFileRelation() {
+  const parent = 'filmstocks'
+  const field = 'bild'
+
+  try {
+    await directusFetch(`/relations/${parent}/${field}`)
+    console.log(`Relation ${parent}.${field} → directus_files existiert bereits`)
+  }
+  catch {
+    await directusFetch('/relations', {
+      method: 'POST',
+      body: JSON.stringify({
+        collection: parent,
+        field,
+        related_collection: 'directus_files',
+        meta: { one_field: null, sort_field: null, one_deselect_action: 'nullify' },
+        schema: { on_delete: 'SET NULL' },
+      }),
+    })
+    console.log(`Relation ${parent}.${field} → directus_files erstellt`)
+  }
+
+  await directusFetch(`/fields/${parent}/${field}`, {
+    method: 'PATCH',
+    body: JSON.stringify({
+      meta: {
+        interface: 'file-image',
+        special: ['file'],
+        display: 'image',
+        display_options: { circle: false },
+      },
+    }),
+  })
+}
+
+/** Files-Relation für Beispielaufnahmen (Look-Galerie) */
+async function setupBeispielbilderFiles() {
+  const parent = 'filmstocks'
+  const field = 'beispielbilder'
+  const junction = 'filmstocks_beispielbilder'
+
+  if (!(await collectionExists(junction))) {
+    await directusFetch('/collections', {
+      method: 'POST',
+      body: JSON.stringify({
+        collection: junction,
+        meta: { hidden: true, icon: 'import_export' },
+        schema: { name: junction },
+        fields: [
+          {
+            field: 'id',
+            type: 'integer',
+            meta: { hidden: true, readonly: true, interface: 'input' },
+            schema: { is_primary_key: true, has_auto_increment: true },
+          },
+          {
+            field: 'filmstocks_id',
+            type: 'uuid',
+            meta: { interface: 'select-dropdown-m2o', special: ['m2o'], hidden: true },
+            schema: {},
+          },
+          {
+            field: 'directus_files_id',
+            type: 'uuid',
+            meta: { interface: 'select-dropdown-m2o', special: ['m2o'], hidden: true },
+            schema: {},
+          },
+        ],
+      }),
+    })
+    console.log(`Junction ${junction} erstellt`)
+  }
+  else {
+    console.log(`Junction ${junction} existiert bereits`)
+  }
+
+  try {
+    await directusFetch(`/relations/${junction}/filmstocks_id`)
+  }
+  catch {
+    await directusFetch('/relations', {
+      method: 'POST',
+      body: JSON.stringify({
+        collection: junction,
+        field: 'filmstocks_id',
+        related_collection: parent,
+        meta: { one_field: field, junction_field: 'directus_files_id' },
+        schema: { on_delete: 'CASCADE' },
+      }),
+    })
+  }
+
+  try {
+    await directusFetch(`/relations/${junction}/directus_files_id`)
+  }
+  catch {
+    await directusFetch('/relations', {
+      method: 'POST',
+      body: JSON.stringify({
+        collection: junction,
+        field: 'directus_files_id',
+        related_collection: 'directus_files',
+        meta: { junction_field: 'filmstocks_id' },
+        schema: { on_delete: 'CASCADE' },
+      }),
+    })
+  }
+
+  // Alias-Feld anlegen oder special: files nachziehen (MCP setzt special oft nicht)
+  try {
+    await directusFetch(`/fields/${parent}/${field}`)
+    await directusFetch(`/fields/${parent}/${field}`, {
+      method: 'PATCH',
+      body: JSON.stringify({
+        meta: {
+          interface: 'files',
+          special: ['files'],
+          display: 'related-values',
+          note: 'Beispielaufnahmen (Look) – Attribution in File-description',
+        },
+      }),
+    })
+    console.log(`Feld ${parent}.${field} aktualisiert (files)`)
+  }
+  catch {
+    await createField(parent, {
+      field,
+      type: 'alias',
+      meta: {
+        interface: 'files',
+        special: ['files'],
+        display: 'related-values',
+        note: 'Beispielaufnahmen (Look) – Attribution in File-description',
+      },
+    })
+  }
 }
 
 async function setupEntwicklungsrezepte() {

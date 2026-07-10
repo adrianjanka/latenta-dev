@@ -13,21 +13,21 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <div class="space-y-3">
+  <div class="space-y-5">
     <div
       v-for="group in FILTER_CHIP_GROUPS"
       :key="group.id"
-      class="space-y-2"
+      class="space-y-2.5"
     >
       <p class="text-xs font-semibold uppercase tracking-wide text-text-subtle">
         {{ group.label }}
       </p>
-      <div class="flex flex-wrap gap-2">
+      <div class="flex flex-wrap gap-2.5">
         <button
           v-for="chip in group.chips"
           :key="chip.value"
           type="button"
-          class="shrink-0 rounded-full px-4 py-2 text-[13px] font-semibold transition"
+          class="shrink-0 rounded-full px-4 py-2.5 text-[13px] font-semibold transition"
           :class="
             filters[group.id] === chip.value
               ? 'bg-latenta-varnish text-latenta-subtle'

@@ -26,26 +26,26 @@ const hasTimer = computed(() => stepHasTimer(props.step))
 
 <template>
   <div class="flex min-h-[calc(100vh-8rem)] flex-col">
-    <div class="mx-auto w-full max-w-lg flex-1 px-6 pb-32 pt-6 sm:px-8">
+    <div class="mx-auto w-full max-w-lg flex-1 px-6 pb-36 pt-8 sm:px-8 sm:pt-10">
       <SharedStepIndicator :current="stepIndex + 1" :total="totalSteps" />
 
-      <h2 class="mt-5 font-display text-3xl uppercase leading-none text-text">
+      <h2 class="mt-8 font-display text-3xl uppercase leading-none text-text">
         {{ step.titel }}
       </h2>
 
-      <p class="mt-4 text-base leading-relaxed text-text-muted">
+      <p class="mt-5 text-base leading-relaxed text-text-muted">
         {{ step.beschreibung }}
       </p>
 
       <button
         type="button"
-        class="mt-5 text-sm text-text-muted underline-offset-2 transition hover:text-text hover:underline"
+        class="mt-6 text-sm text-text-muted underline-offset-2 transition hover:text-text hover:underline"
         @click="emit('skip')"
       >
         Schritt überspringen
       </button>
 
-      <div v-if="hasTimer" class="mt-8">
+      <div v-if="hasTimer" class="mt-10">
         <DevelopmentAssistantDevelopmentTimer
           :display="display"
           :is-running="isRunning"
@@ -59,9 +59,9 @@ const hasTimer = computed(() => stepHasTimer(props.step))
     </div>
 
     <div
-      class="fixed bottom-0 left-0 right-0 bg-gradient-to-t from-surface from-30% to-transparent px-6 pb-7 pt-5 sm:px-8"
+      class="fixed bottom-0 left-0 right-0 bg-gradient-to-t from-surface from-30% to-transparent px-6 pb-8 pt-6 sm:px-8"
     >
-      <div class="mx-auto flex max-w-lg gap-3">
+      <div class="mx-auto flex max-w-lg gap-3.5">
         <SharedAppButton
           variant="primary"
           class="flex-1"

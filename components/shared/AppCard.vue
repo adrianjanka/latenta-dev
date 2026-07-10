@@ -3,7 +3,10 @@ import type { Filmstock, Koernung, Kontrast } from '~/types/filmstock'
 
 const props = withDefaults(
   defineProps<{
-    film: Pick<Filmstock, 'name' | 'hersteller' | 'iso' | 'typ' | 'koernung' | 'kontrast' | 'farbcharakter'>
+    film: Pick<
+      Filmstock,
+      'name' | 'hersteller' | 'iso' | 'typ' | 'koernung' | 'kontrast' | 'farbcharakter' | 'bild' | 'bild_quelle'
+    >
     tags?: string[]
     reasons?: string[]
     compact?: boolean
@@ -14,6 +17,26 @@ const props = withDefaults(
     showCta: false,
   },
 )
+
+const { assetUrl } = useDirectusAsset()
+
+const imageSrc = computed(() =>
+  assetUrl(props.film.bild, {
+    width: props.compact ? 400 : 800,
+    quality: 80,
+    fit: 'cover',
+  }),
+)
+
+const imageLoaded = ref(false)
+
+watch(imageSrc, () => {
+  imageLoaded.value = false
+})
+
+function onImageLoad() {
+  imageLoaded.value = true
+}
 
 const koernungLabel: Record<Koernung, string> = {
   fein: 'Fein',
@@ -42,19 +65,33 @@ const placeholderClass = computed(() =>
 
 <template>
   <article
-    class="flex flex-col overflow-hidden rounded-card text-latenta-bighorn"
+    class="group flex flex-col overflow-hidden rounded-card text-latenta-bighorn"
     :class="
       compact
         ? 'bg-white shadow-[0_4px_10px_rgba(30,21,16,0.06)] dark:bg-latenta-subtle dark:shadow-none'
         : 'bg-white shadow-[0_4px_14px_rgba(30,21,16,0.08)] dark:bg-latenta-subtle dark:shadow-xl dark:shadow-black/40'
     "
   >
-  <!-- Placeholder image area -->
+    <!-- Rollenfoto oder Placeholder -->
     <div
-      class="flex items-center justify-center text-center font-mono text-[11px] text-latenta-bighorn"
-      :class="[placeholderClass, compact ? 'h-[70px]' : 'aspect-[3/2] min-h-[140px]']"
+      class="motion-img-zoom-parent relative overflow-hidden"
+      :class="[compact ? 'h-[70px]' : 'aspect-[3/2] min-h-[140px]', !imageSrc ? placeholderClass : 'bg-latenta-bighorn/10']"
     >
-      <span v-if="!compact">FILMSTOCK<br>PRODUKTFOTO</span>
+      <img
+        v-if="imageSrc"
+        :src="imageSrc"
+        :alt="`${film.hersteller} ${film.name}`"
+        class="motion-img-reveal motion-img-zoom h-full w-full object-cover"
+        :class="{ 'is-loaded': imageLoaded }"
+        loading="lazy"
+        @load="onImageLoad"
+      >
+      <span
+        v-else-if="!compact"
+        class="flex h-full items-center justify-center text-center font-mono text-[11px] text-latenta-bighorn"
+      >
+        FILMSTOCK<br>PRODUKTFOTO
+      </span>
     </div>
 
     <!-- Color bar -->
@@ -67,7 +104,7 @@ const placeholderClass = computed(() =>
       />
     </div>
 
-    <div :class="compact ? 'flex flex-1 flex-col p-2.5' : 'p-4 sm:p-[18px]'">
+    <div :class="compact ? 'flex flex-1 flex-col p-3.5' : 'p-5 sm:p-6'">
       <p
         v-if="!compact && film.hersteller"
         class="text-xs font-semibold uppercase tracking-wide text-latenta-muted-light"
@@ -76,14 +113,14 @@ const placeholderClass = computed(() =>
       </p>
       <h3
         class="font-display uppercase leading-tight text-latenta-bighorn"
-        :class="compact ? 'line-clamp-2 min-h-[2.5rem] text-sm' : 'text-xl sm:text-[22px]'"
+        :class="compact ? 'mt-0.5 line-clamp-2 min-h-[2.5rem] text-sm' : 'mt-1 text-xl sm:text-[22px]'"
       >
         {{ film.name }}
       </h3>
 
       <div
         v-if="!compact"
-        class="mt-3.5 grid grid-cols-3 gap-2 text-center"
+        class="mt-5 grid grid-cols-3 gap-3 text-center"
       >
         <div>
           <div class="font-display text-xl text-latenta-varnish">{{ film.iso }}</div>
@@ -101,19 +138,19 @@ const placeholderClass = computed(() =>
 
       <p
         v-else
-        class="mt-auto pt-1 text-[10px] text-latenta-muted-light"
+        class="mt-auto pt-2 text-[10px] text-latenta-muted-light"
       >
         ISO {{ film.iso }} · {{ koernungLabel[film.koernung] }}
       </p>
 
       <p
         v-if="!compact && film.farbcharakter"
-        class="mt-2 text-sm text-latenta-muted-light"
+        class="mt-3 text-sm text-latenta-muted-light"
       >
         {{ film.farbcharakter }}
       </p>
 
-      <ul v-if="reasons?.length" class="mt-3 space-y-1 border-t border-latenta-bighorn/10 pt-3">
+      <ul v-if="reasons?.length" class="mt-4 space-y-1.5 border-t border-latenta-bighorn/10 pt-4">
         <li
           v-for="(reason, index) in reasons"
           :key="index"
@@ -123,7 +160,7 @@ const placeholderClass = computed(() =>
         </li>
       </ul>
 
-      <div v-if="tags?.length && !compact" class="mt-3 flex flex-wrap gap-2">
+      <div v-if="tags?.length && !compact" class="mt-4 flex flex-wrap gap-2">
         <SharedAppTag
           v-for="tag in tags"
           :key="tag"
@@ -133,11 +170,18 @@ const placeholderClass = computed(() =>
         />
       </div>
 
+      <p
+        v-if="!compact && film.bild_quelle && imageSrc"
+        class="mt-4 text-[10px] leading-snug text-latenta-muted-light/80"
+      >
+        {{ film.bild_quelle }}
+      </p>
+
       <SharedAppButton
         v-if="showCta && !compact"
         variant="primary"
         size="md"
-        class="mt-3.5 w-full"
+        class="mt-5 w-full"
       >
         Details ansehen
       </SharedAppButton>

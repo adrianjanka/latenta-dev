@@ -31,6 +31,7 @@ Seed-Daten: [`data/stimmungs-tags.json`](../data/stimmungs-tags.json)
 | `beschreibung_en` | text, optional | Original/englische Quellbeschreibung |
 | `bild` | file (image), optional | Produktfoto der Filmrolle |
 | `bild_quelle` | string, optional | Quellenangabe für Rollenfoto |
+| `beispielbilder` | files → `directus_files`, optional | Look-Beispiele; Attribution in File-`description` |
 | `stimmungs_tags` | m2m → `stimmungs_tags` | Empfehlungslogik |
 | `externe_quelle` | string | z.B. «Film API (MIT)» |
 | `externe_id` | string | Referenz zur Film API |
@@ -53,11 +54,16 @@ Seed-Daten: [`data/stimmungs-tags.json`](../data/stimmungs-tags.json)
 
 Seed: `npm run data:seed:recipes` (aus `data/development-recipes.mock.ts`)
 
-## M2M-Junction
+## Junctions
 
-`filmstocks_stimmungs_tags` – Verknüpfung zwischen `filmstocks` und `stimmungs_tags`.
+- `filmstocks_stimmungs_tags` – M2M zwischen `filmstocks` und `stimmungs_tags`
+- `filmstocks_beispielbilder` – Files-Junction (`filmstocks_id` + `directus_files_id`) für Look-Beispiele
 
 Junction-Felder brauchen `meta` mit `special: ['m2o']` und korrekte Relations (`one_field`, `junction_field`). Bei Admin-UI-Fehlern: `npm run directus:setup` (Reparatur) oder Directus MCP.
+
+Bilder: Seed via `npm run data:seed:images` (Unsplash → Directus `/files/import`, Attribution in `bild_quelle` / File-description).  
+Unsplash Demo: 50 Requests/h → gestaffelt `npm run data:seed:images -- --limit=2` (ca. alle Stunde wiederholen).  
+`bild` braucht eine Relation zu `directus_files` (`npm run directus:setup` legt sie an), sonst zeigt die Admin-UI kein Vorschaubild.
 
 ## Einrichtung
 

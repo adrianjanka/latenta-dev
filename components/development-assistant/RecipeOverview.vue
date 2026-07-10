@@ -15,10 +15,10 @@ const filmLabel = computed(() => getRecipeFilmLabel(props.recipe))
 </script>
 
 <template>
-  <div class="mx-auto max-w-lg px-6 pb-32 pt-6 sm:px-8">
+  <div class="mx-auto max-w-lg px-6 pb-36 pt-8 sm:px-8 sm:pt-10">
     <button
       type="button"
-      class="mb-4 inline-flex items-center gap-1 text-sm text-text-muted transition hover:text-text"
+      class="mb-6 inline-flex items-center gap-1 text-sm text-text-muted transition hover:text-text"
       @click="emit('back')"
     >
       ← Zurück
@@ -27,11 +27,11 @@ const filmLabel = computed(() => getRecipeFilmLabel(props.recipe))
     <h1 class="font-display text-[2rem] uppercase leading-none text-text">
       Übersicht
     </h1>
-    <p class="mt-3 text-sm text-text-muted">
+    <p class="mt-4 text-sm text-text-muted">
       {{ filmLabel }}
     </p>
 
-    <div class="mt-6 space-y-4 rounded-card border border-border-strong bg-surface-elevated p-5 dark:border-border">
+    <div class="mt-8 space-y-5 rounded-card border border-border-strong bg-surface-elevated p-6 dark:border-border">
       <div>
         <p class="text-xs font-semibold uppercase tracking-wide text-text-subtle">
           Entwickler
@@ -86,7 +86,7 @@ const filmLabel = computed(() => getRecipeFilmLabel(props.recipe))
     </div>
 
     <div
-      class="fixed bottom-0 left-0 right-0 bg-gradient-to-t from-surface from-30% to-transparent px-6 pb-7 pt-5 sm:px-8"
+      class="fixed bottom-0 left-0 right-0 bg-gradient-to-t from-surface from-30% to-transparent px-6 pb-8 pt-6 sm:px-8"
     >
       <div class="mx-auto max-w-lg">
         <SharedAppButton variant="primary" class="w-full" @click="emit('start')">

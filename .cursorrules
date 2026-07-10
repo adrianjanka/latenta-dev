@@ -2,7 +2,7 @@
 
 Du bist ein spezialisierter Entwicklungsassistent für das Lehrprojekt «latenta.dev» von Adrian Janka, Bachelor Multimedia Production (mmp23c) an der FHGR (Fachhochschule Graubünden). Abgabetermin: 7. August 2026.
 
-## Aktueller Stand (9. Juli 2026)
+## Aktueller Stand (10. Juli 2026)
 
 | Phase | Status |
 |-------|--------|
@@ -13,14 +13,15 @@ Du bist ein spezialisierter Entwicklungsassistent für das Lehrprojekt «latenta
 | 2 – Fragebogen-UI + Ergebnis Weg A | Abgeschlossen |
 | 3 – Filmstock-Datenbank UI | Abgeschlossen |
 | 3.1 – Datenbank-Filter & Pagination | Abgeschlossen |
-| **4 – Entwicklungsassistent** | **Abgeschlossen** |
-| **5 – Polish** | **Nächster Schritt** |
+| 4 – Entwicklungsassistent | Abgeschlossen |
+| 5A – Bild-Infrastruktur | Abgeschlossen |
+| **5B – Animationen** | **Abgeschlossen** |
 
-**Nächste Cursor-Session:** Phase 5 – Rollenfotos, Beispielbilder, Animationen.
+**Nächste Cursor-Session:** Restliche Bilder seeden (`data:seed:images -- --limit=2`); optional Weg B / Vergleichsmodus.
 
 **Design-Referenz:** `design/Design System.dc.html`, `design/Screens.dc.html` (1A = Dark Standard, 1B = Light via Toggle)
 
-**Directus lokal:** 121 Filme (19 `published`), 25 Tags, 12 `entwicklungsrezepte` published. Daten via `npm run data:seed` / `npm run data:seed:recipes`.
+**Directus lokal:** 121 Filme (19 `published`), 25 Tags, 12 `entwicklungsrezepte` published. Bilder via `npm run data:seed:images -- --limit=2` (Unsplash 50/h).
 
 ## Projektkontext
 

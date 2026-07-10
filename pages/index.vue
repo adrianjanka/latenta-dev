@@ -21,29 +21,30 @@ const features = [
 </script>
 
 <template>
-  <div class="mx-auto max-w-lg px-6 pb-12 pt-8 sm:max-w-xl sm:px-8 sm:pt-12">
+  <div class="motion-fade-up mx-auto max-w-lg px-6 pb-16 pt-10 sm:max-w-xl sm:px-8 sm:pt-14">
     <p class="text-xs font-semibold uppercase tracking-[0.15em] text-latenta-varnish dark:text-text-muted">
       latenta.dev
     </p>
 
-    <h1 class="mt-3.5 font-display text-[2.75rem] uppercase leading-[0.95] text-text sm:text-5xl">
+    <h1 class="mt-5 font-display text-[2.75rem] uppercase leading-[0.95] text-text sm:text-5xl">
       Finde deinen<br>ersten Film.
     </h1>
 
-    <p class="mt-3.5 text-[15px] leading-relaxed text-text-muted">
+    <p class="mt-5 text-[15px] leading-relaxed text-text-muted">
       6 Fragen. Drei Empfehlungen. Kein Rätselraten in der Dunkelkammer.
     </p>
 
-    <SharedAppButton to="/decision-helper" variant="primary" class="mt-5 w-full">
+    <SharedAppButton to="/decision-helper" variant="primary" class="mt-8 w-full">
       Fragebogen starten
     </SharedAppButton>
 
-    <div class="mt-4 flex flex-col gap-3.5">
+    <div class="mt-6 flex flex-col gap-4">
       <NuxtLink
-        v-for="feature in features"
+        v-for="(feature, index) in features"
         :key="feature.to"
         :to="feature.to"
-        class="flex items-center gap-3.5 rounded-card border border-border bg-surface-elevated p-[18px] shadow-sm transition hover:border-border-strong dark:shadow-none"
+        class="motion-stagger flex items-center gap-4 rounded-card border border-border bg-surface-elevated p-5 shadow-sm transition duration-200 hover:border-border-strong hover:-translate-y-0.5 dark:shadow-none"
+        :style="{ '--stagger': index + 1 }"
       >
         <div
           class="h-11 w-11 shrink-0 rounded-lg"
@@ -53,7 +54,7 @@ const features = [
           <div class="text-[15px] font-bold text-text">
             {{ feature.title }}
           </div>
-          <div class="mt-0.5 text-[13px] text-text-muted">
+          <div class="mt-1 text-[13px] text-text-muted">
             {{ feature.description }}
           </div>
         </div>

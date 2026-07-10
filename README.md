@@ -54,6 +54,7 @@ Directus Admin: http://localhost:8055 (`adi.janka@bluewin.ch` / `directus`)
 ```bash
 npm run directus:setup   # Collections anlegen
 npm run data:seed        # Aus data/filmstocks.enriched.json importieren
+npm run data:seed:images # Optional: Unsplash → Rollenfotos + Beispiele (braucht UNSPLASH_ACCESS_KEY)
 ```
 
 Volle Pipeline (Film API neu holen + KI-Anreicherung): `npm run data:pipeline && npm run data:seed`
@@ -75,6 +76,8 @@ App: http://localhost:3000
 | `npm run directus:setup` | Directus-Schema + M2M-Reparatur |
 | `npm run data:pipeline` | fetch → transform → enrich |
 | `npm run data:seed` | enriched.json → Directus |
+| `npm run data:seed:recipes` | Entwicklungsrezepte → Directus |
+| `npm run data:seed:images` | Unsplash → Directus Files (Rollenfotos + Beispiele); gestaffelt: `-- --limit=2` |
 | `npm run test:recommendation` | Matcher gegen Mock-Daten testen |
 
 ## Projektstruktur
@@ -99,15 +102,15 @@ latenta-dev/
 
 Details: [docker/SCHEMA.md](docker/SCHEMA.md)
 
-## Aktueller Stand (9. Juli 2026)
+## Aktueller Stand (10. Juli 2026)
 
 | Erledigt | Ausstehend |
 |----------|------------|
-| Design Foundation + Fragebogen-UI (Weg A) | Entwicklungsassistent (Phase 4) |
-| Filmstock-Datenbank (Grid, Filter, Detail) | KI-Bildanalyse Weg B |
+| Design, Fragebogen (Weg A), Datenbank, Entwicklungsassistent | Restliche Unsplash-Bilder (gestaffelt) |
+| Bild-Infrastruktur (5A) + Motion (5B) | KI-Bildanalyse Weg B |
 | Film-API-Pipeline, KI-Anreicherung | Vergleichsmodus Datenbank |
 
-Nächster Schritt: Phase 5 – Polish. Siehe [Dokumentation.md](Dokumentation.md).
+Nächster Schritt: Bilder nachfüllen (`npm run data:seed:images -- --limit=2`); optional Weg B. Siehe [Dokumentation.md](Dokumentation.md).
 
 ## Dokumentation
 
@@ -115,7 +118,7 @@ Fortlaufendes Entwicklungsjournal mit Entscheidungen und Reflexion: [Dokumentati
 
 ## Lizenz & Quellen
 
-Film-Daten: [Film API](https://filmapi.vercel.app/api/films) (MIT). Entwicklungsrezepte mit Quellenangabe im `quelle`-Feld. Bilder nur lizenzfrei.
+Film-Daten: [Film API](https://filmapi.vercel.app/api/films) (MIT). Entwicklungsrezepte mit Quellenangabe im `quelle`-Feld. Bilder: Unsplash (Attribution in `bild_quelle` / File-description), nur lizenzfrei.
 
 ## Autor
 

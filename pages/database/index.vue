@@ -36,12 +36,12 @@ function handleFilterChange(key: keyof FilmstockFilterState, value: string) {
 </script>
 
 <template>
-  <div class="mx-auto max-w-lg px-6 pb-12 pt-6 sm:max-w-xl sm:px-8">
+  <div class="mx-auto max-w-lg px-6 pb-16 pt-8 sm:max-w-xl sm:px-8 sm:pt-10">
     <h1 class="font-display text-[2rem] uppercase leading-none text-text sm:text-[2rem]">
       Filmstocks
     </h1>
 
-    <div class="mt-3.5 space-y-3">
+    <div class="mt-6 space-y-5">
       <DatabaseFilterChips
         :filters="filters"
         @change="handleFilterChange"
@@ -49,20 +49,20 @@ function handleFilterChange(key: keyof FilmstockFilterState, value: string) {
       <DatabaseSearchField v-model="searchQuery" />
     </div>
 
-    <div v-if="pending" class="mt-10 text-center text-sm text-text-muted">
+    <div v-if="pending" class="mt-12 text-center text-sm text-text-muted">
       Filme werden geladen…
     </div>
 
-    <div v-else-if="error" class="mt-10 text-center text-sm text-text-muted">
+    <div v-else-if="error" class="mt-12 text-center text-sm text-text-muted">
       Filme konnten nicht geladen werden.
     </div>
 
-    <div v-else-if="filteredFilms.length === 0" class="mt-10 text-center text-sm text-text-muted">
+    <div v-else-if="filteredFilms.length === 0" class="mt-12 text-center text-sm text-text-muted">
       Keine Filme für diese Suche oder Filterkombination.
     </div>
 
     <template v-else>
-      <div class="mt-4">
+      <div class="mt-8">
         <DatabaseFilmstockGrid :films="paginatedItems" />
       </div>
 
@@ -75,7 +75,7 @@ function handleFilterChange(key: keyof FilmstockFilterState, value: string) {
       />
     </template>
 
-    <p v-if="source === 'mock' && !pending" class="mt-6 text-center text-xs text-text-subtle">
+    <p v-if="source === 'mock' && !pending" class="mt-8 text-center text-xs text-text-subtle">
       Mock-Daten (Directus nicht erreichbar)
     </p>
   </div>

@@ -1,0 +1,167 @@
+{
+  "default_roll_query": "35mm film roll cassette",
+  "look_by_typ": {
+    "farbe": [
+      "color film photography portrait",
+      "warm analog color photography"
+    ],
+    "s_w": [
+      "black and white film photography",
+      "grainy black and white analog photo"
+    ]
+  },
+  "films": {
+    "2cb22c04-f29a-4ab4-9a45-d2a635aa2426": {
+      "label": "AgfaPhoto APX 400",
+      "roll_query": "black and white 35mm film roll",
+      "look_queries": [
+        "classic black and white street photography",
+        "grainy black and white portrait film"
+      ]
+    },
+    "b1c01cdd-bf70-43d5-8453-a83368f79fe4": {
+      "label": "CineStill 50Daylight",
+      "roll_query": "35mm color film canister",
+      "look_queries": [
+        "daylight cinematic color photography",
+        "clean color film landscape"
+      ]
+    },
+    "d0ff0625-213d-4a5c-9b98-83edc88355d7": {
+      "label": "CineStill 800Tungsten",
+      "roll_query": "35mm film roll night",
+      "look_queries": [
+        "neon night photography film",
+        "tungsten warm night city film"
+      ]
+    },
+    "7878f1cc-e16a-4bf5-83d6-02d901fdda76": {
+      "label": "Fujifilm Pro 400H",
+      "roll_query": "fujifilm 35mm film roll",
+      "look_queries": [
+        "soft pastel film photography",
+        "fuji film wedding portrait"
+      ]
+    },
+    "fb82462b-7186-494d-bf0d-a693a9fbe9ee": {
+      "label": "Ilford Delta 100",
+      "roll_query": "ilford black and white film roll",
+      "look_queries": [
+        "fine grain black and white portrait",
+        "sharp black and white film photography"
+      ]
+    },
+    "c25b69e1-3db3-4c16-9a33-81ced84b5d5e": {
+      "label": "Ilford Delta 400",
+      "roll_query": "ilford 35mm film cassette",
+      "look_queries": [
+        "black and white documentary photography",
+        "medium grain black and white street"
+      ]
+    },
+    "292ed8b0-5ffa-4a61-bec8-a857d678177c": {
+      "label": "Kentmere Pan 400",
+      "roll_query": "black and white film canister",
+      "look_queries": [
+        "everyday black and white film photo",
+        "casual black and white street film"
+      ]
+    },
+    "83275566-d9c3-4836-8b80-2eb5422aeb07": {
+      "label": "Kodak ColorPlus 200",
+      "roll_query": "kodak color film roll",
+      "look_queries": [
+        "nostalgic color film photography",
+        "everyday color film snapshot"
+      ]
+    },
+    "fb95fb40-c574-41f0-893f-13df35686dfa": {
+      "label": "Kodak Ultramax 400",
+      "roll_query": "kodak 35mm film roll",
+      "look_queries": [
+        "vivid color film photography",
+        "consumer color film travel photo"
+      ]
+    },
+    "aaf8ed9b-8fbb-4f14-8d0f-a5936ce117f0": {
+      "label": "Kodak Gold 200",
+      "roll_query": "kodak gold film roll",
+      "look_queries": [
+        "warm golden hour film photography",
+        "kodak gold film look portrait"
+      ]
+    },
+    "f7c1e1cc-9061-47c9-a65e-71deffd05bf6": {
+      "label": "Kodak Pro Image 100",
+      "roll_query": "kodak professional film roll",
+      "look_queries": [
+        "clean color portrait film",
+        "studio color film photography"
+      ]
+    },
+    "d7e617fc-44bc-42fc-ba27-2c3b645b5470": {
+      "label": "Kodak Ektar 100",
+      "roll_query": "kodak ektar film roll",
+      "look_queries": [
+        "vivid saturated landscape film",
+        "high saturation color film photography"
+      ]
+    },
+    "9c249a23-812c-40d2-b3a6-8a54c41151ea": {
+      "label": "Kodak Portra 160",
+      "roll_query": "kodak portra film roll",
+      "look_queries": [
+        "soft skin tone film portrait",
+        "portra film look photography"
+      ]
+    },
+    "175cb506-ed65-4aaf-b6c3-3e5107008132": {
+      "label": "Kodak Portra 400",
+      "roll_query": "kodak portra 400 film roll",
+      "look_queries": [
+        "portra 400 film portrait",
+        "natural color film photography"
+      ]
+    },
+    "6239ccc5-2c20-41d1-96d9-c01fef5d4ca5": {
+      "label": "Kodak Portra 800",
+      "roll_query": "kodak portra film canister",
+      "look_queries": [
+        "low light color film photography",
+        "portra 800 indoor portrait film"
+      ]
+    },
+    "b6972bf7-280c-42de-a6b2-f4673f41069d": {
+      "label": "Kodak T-Max 100",
+      "roll_query": "kodak tmax film roll",
+      "look_queries": [
+        "fine grain black and white landscape",
+        "modern black and white film photo"
+      ]
+    },
+    "742e0799-a003-4f7a-abe0-1b084b8f4b9f": {
+      "label": "Kodak T-Max 400",
+      "roll_query": "kodak black and white film roll",
+      "look_queries": [
+        "sharp black and white street photography",
+        "tmax film look portrait"
+      ]
+    },
+    "523b1ef4-647c-4ae6-9db3-cd0b8d34d884": {
+      "label": "Kodak Tri-X 400",
+      "roll_query": "kodak tri-x film roll",
+      "look_queries": [
+        "classic tri-x black and white",
+        "grainy documentary black and white film"
+      ]
+    },
+    "f04d30e8-e324-4271-80e7-7856b3d88a53": {
+      "label": "Rollei Retro 400S",
+      "roll_query": "vintage 35mm film roll",
+      "look_queries": [
+        "vintage black and white film look",
+        "retro analog black and white photo"
+      ]
+    }
+  }
+}

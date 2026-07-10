@@ -7,12 +7,13 @@ defineProps<{
 </script>
 
 <template>
-  <div class="grid grid-cols-2 gap-3 auto-rows-fr">
+  <div class="grid auto-rows-fr grid-cols-2 gap-4">
     <NuxtLink
-      v-for="film in films"
+      v-for="(film, index) in films"
       :key="film.id"
       :to="`/database/${film.id}`"
-      class="flex h-full transition hover:opacity-90"
+      class="group motion-stagger flex h-full transition duration-200 hover:-translate-y-0.5 hover:opacity-95"
+      :style="{ '--stagger': Math.min(index, 11) }"
     >
       <SharedAppCard :film="film" compact class="h-full w-full" />
     </NuxtLink>

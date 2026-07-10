@@ -10,7 +10,7 @@ const mobileOpen = ref(false)
 
 <template>
   <header class="border-b border-border bg-surface">
-    <div class="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-4 sm:px-6">
+    <div class="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-5 sm:px-6">
       <NuxtLink
         to="/"
         class="font-display text-lg uppercase tracking-tight text-text sm:text-xl"

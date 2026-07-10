@@ -14,7 +14,7 @@ const emit = defineEmits<{
 <template>
   <div
     v-if="totalPages > 1"
-    class="mt-6 flex flex-col items-center gap-3"
+    class="mt-10 flex flex-col items-center gap-4"
   >
     <p class="text-center text-sm text-text-muted">
       {{ rangeLabel }}

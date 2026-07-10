@@ -10,6 +10,9 @@
   --text-subtle: #8a7360;
   --border: rgba(30, 21, 16, 0.12);
   --border-strong: rgba(30, 21, 16, 0.2);
+  --motion-duration: 320ms;
+  --motion-duration-fast: 200ms;
+  --motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
   color-scheme: light;
 }
 
@@ -31,5 +34,126 @@
 
   ::selection {
     @apply bg-latenta-varnish text-latenta-subtle;
+  }
+}
+
+/* Phase 5B – Motion (Analog-Ästhetik, zurückhaltend) */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes grain-drift {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(-1.2%, -0.8%); }
+  50% { transform: translate(1%, 1.2%); }
+  75% { transform: translate(-0.6%, 1%); }
+}
+
+@layer utilities {
+  .motion-fade-up {
+    animation: fade-up var(--motion-duration) var(--motion-ease) both;
+  }
+
+  .motion-fade-in {
+    animation: fade-in var(--motion-duration-fast) var(--motion-ease) both;
+  }
+
+  .motion-stagger {
+    animation: fade-up var(--motion-duration) var(--motion-ease) both;
+    animation-delay: calc(var(--stagger, 0) * 45ms);
+  }
+
+  .motion-img-reveal {
+    opacity: 0;
+    transition:
+      opacity var(--motion-duration) var(--motion-ease),
+      transform var(--motion-duration) var(--motion-ease);
+  }
+
+  .motion-img-reveal.is-loaded {
+    opacity: 1;
+  }
+
+  /* Hover-Zoom: Parent braucht .motion-img-zoom-parent + overflow-hidden */
+  .motion-img-zoom {
+    transform: scale(1);
+    transition: transform var(--motion-duration) var(--motion-ease);
+    will-change: transform;
+  }
+
+  .motion-img-zoom-parent:hover .motion-img-zoom,
+  .motion-img-zoom-parent:focus-within .motion-img-zoom,
+  .group:hover .motion-img-zoom {
+    transform: scale(1.08);
+  }
+}
+
+/* Page transitions (NuxtPage) */
+.page-enter-active,
+.page-leave-active {
+  transition:
+    opacity var(--motion-duration) var(--motion-ease),
+    transform var(--motion-duration) var(--motion-ease);
+}
+
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.page-enter-to,
+.page-leave-from {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-duration: 1ms;
+    --motion-duration-fast: 1ms;
+  }
+
+  .motion-fade-up,
+  .motion-fade-in,
+  .motion-stagger,
+  .grain-motion {
+    animation: none !important;
+  }
+
+  .motion-img-reveal {
+    opacity: 1;
+    transition: none;
+  }
+
+  .motion-img-zoom,
+  .motion-img-zoom-parent:hover .motion-img-zoom,
+  .motion-img-zoom-parent:focus-within .motion-img-zoom,
+  .group:hover .motion-img-zoom {
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .page-enter-active,
+  .page-leave-active {
+    transition: none;
+  }
+
+  .page-enter-from,
+  .page-leave-to {
+    opacity: 1;
+    transform: none;
   }
 }
