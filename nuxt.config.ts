@@ -8,6 +8,8 @@ export default defineNuxtConfig({
 
   app: {
     head: {
+      title: 'latenta.dev',
+      htmlAttrs: { lang: 'de' },
       script: [
         {
           innerHTML: `(function(){try{var t=localStorage.getItem('latenta-theme');if(t==='light')document.documentElement.classList.remove('dark');else document.documentElement.classList.add('dark')}catch(e){document.documentElement.classList.add('dark')}})()`,
@@ -15,6 +17,7 @@ export default defineNuxtConfig({
         },
       ],
       link: [
+        { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
         {

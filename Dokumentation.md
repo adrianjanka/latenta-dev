@@ -9,9 +9,9 @@ Abgabetermin: **7. August 2026**
 
 ## Aktueller Stand (10. Juli 2026)
 
-**Erledigt:** Phasen 1–5B – inkl. Bild-Infrastruktur und Motion/Polish.
+**Erledigt:** Phasen 1–5B, plus Legal (Impressum/Datenschutz) und Favicon.
 
-**Nächster Schritt:** Restliche Rollenfotos seeden (`npm run data:seed:images -- --limit=2`, Unsplash 50/h); optional Weg B / Vergleichsmodus.
+**Nächste Session:** Weg B (KI-Bildanalyse) + kleiner Vergleichsmodus in der Datenbank.
 
 | Was | Wo nachschlagen |
 |-----|-----------------|
@@ -24,6 +24,7 @@ Abgabetermin: **7. August 2026**
 | Rezepte seeden | `npm run data:seed:recipes` |
 | Bilder seeden | `npm run data:seed:images` (Unsplash → Directus) |
 | Asset-URLs | `composables/useDirectusAsset.ts` |
+| Impressum / Datenschutz | `pages/impressum.vue`, `pages/datenschutz.vue` |
 
 ---
 
@@ -263,6 +264,18 @@ Pro Film ~6 Unsplash-Calls; bei Rate-Limit bricht das Script ab. Nach ~1 h erneu
 
 **Entscheidungen:** Wenige, bewusste Motionen statt überall Transition; reduced-motion first-class.
 
+## Phase 5C – Legal & Favicon (abgeschlossen)
+
+**Ziel:** Impressum und Datenschutz verlinken; Favicon für Browser-Tab.
+
+**Umgesetzt:**
+1. `pages/impressum.vue` – Verantwortliche Person, Kontakt, Haftung, Quellen
+2. `pages/datenschutz.vue` – DSG-CH: lokale Theme-Daten, Hosting, Google Fonts, Directus, geplante KI (Weg B)
+3. Footer-Links in `components/shared/AppFooter.vue`
+4. `public/favicon.svg` + Eintrag in `nuxt.config.ts`
+
+**Hinweis:** Postadresse im Impressum aktuell «auf Anfrage»; bei Bedarf ergänzen.
+
 ## Design & UX – Roadmap
 
 | Phase | Inhalt | Status |
@@ -276,6 +289,9 @@ Pro Film ~6 Unsplash-Calls; bei Rate-Limit bricht das Script ab. Nach ~1 h erneu
 | 4 | Entwicklungsassistent | **Erledigt** |
 | 5A | Bild-Infrastruktur (Rollenfotos + Beispielbilder + Unsplash-Seed) | **Erledigt** |
 | 5B | Animationen / Micro-Interactions | **Erledigt** |
+| 5C | Impressum, Datenschutz, Favicon | **Erledigt** |
+| 6 | Weg B (KI-Bildanalyse) | **Nächste Session** |
+| 6b | Vergleichsmodus Datenbank | **Nächste Session** |
 
 ---
 
@@ -303,6 +319,7 @@ Pro Film ~6 Unsplash-Calls; bei Rate-Limit bricht das Script ab. Nach ~1 h erneu
 | 2026-07-10 | `beispielbilder` als files-Relation | Mehrere Looks pro Film; Quelle in File-description |
 | 2026-07-10 | Seed gestaffelt (`--limit`), Rate-Limit-Abbruch | Unsplash Demo 50 Requests/h |
 | 2026-07-10 | Phase 5B: sparsame Motion + reduced-motion | Hierarchie ohne UI-Lärm |
+| 2026-07-10 | Impressum + Datenschutz im Footer; Favicon SVG | Rechtliche Transparenz Lehrprojekt / FHGR |
 
 ---
 
@@ -348,6 +365,10 @@ Bilder kommen bewusst über Directus (nicht per Hotlink), damit Attribution, Off
 
 Motion bleibt sparsam: Page-Fade, gestaffelte Karten, Bild-Reveal und dezenter Grain. `prefers-reduced-motion` ist Pflicht für Usability und Bewertung (Gestaltung/Handwerk).
 
+### Phase 5C
+
+Impressum und Datenschutz machen das Lehrprojekt abgabetauglich (Transparenz, DSG). Favicon stärkt den Markenauftritt im Browser-Tab. Nächste Session: Weg B (KI) und Vergleichsmodus.
+
 ---
 
 ## Changelog
@@ -367,3 +388,4 @@ Motion bleibt sparsam: Page-Fade, gestaffelte Karten, Bild-Reveal und dezenter G
 | 2026-07-10 | Phase 5A: beispielbilder-Schema, Asset-Helper, AppCard/Detail, Unsplash-Seed |
 | 2026-07-10 | `bild`→`directus_files`-Relation; Seed mit `--limit` wegen Unsplash 50/h |
 | 2026-07-10 | Phase 5B: Page-Transition, Stagger, Bild-Reveal, Grain, reduced-motion |
+| 2026-07-10 | Phase 5C: Impressum, Datenschutz, Favicon |

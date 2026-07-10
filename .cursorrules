@@ -15,9 +15,12 @@ Du bist ein spezialisierter Entwicklungsassistent für das Lehrprojekt «latenta
 | 3.1 – Datenbank-Filter & Pagination | Abgeschlossen |
 | 4 – Entwicklungsassistent | Abgeschlossen |
 | 5A – Bild-Infrastruktur | Abgeschlossen |
-| **5B – Animationen** | **Abgeschlossen** |
+| 5B – Animationen | Abgeschlossen |
+| 5C – Impressum, Datenschutz, Favicon | Abgeschlossen |
+| **6 – Weg B (KI-Bildanalyse)** | **Nächste Session** |
+| **6b – Vergleichsmodus** | **Nächste Session** |
 
-**Nächste Cursor-Session:** Restliche Bilder seeden (`data:seed:images -- --limit=2`); optional Weg B / Vergleichsmodus.
+**Nächste Cursor-Session:** Weg B (KI-Bildanalyse) + kleiner Vergleichsmodus in der Datenbank. Parallel Restbilder: `npm run data:seed:images -- --limit=2`.
 
 **Design-Referenz:** `design/Design System.dc.html`, `design/Screens.dc.html` (1A = Dark Standard, 1B = Light via Toggle)
 

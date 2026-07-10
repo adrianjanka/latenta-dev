@@ -106,11 +106,11 @@ Details: [docker/SCHEMA.md](docker/SCHEMA.md)
 
 | Erledigt | Ausstehend |
 |----------|------------|
-| Design, Fragebogen (Weg A), Datenbank, Entwicklungsassistent | Restliche Unsplash-Bilder (gestaffelt) |
-| Bild-Infrastruktur (5A) + Motion (5B) | KI-Bildanalyse Weg B |
-| Film-API-Pipeline, KI-Anreicherung | Vergleichsmodus Datenbank |
+| Design, Fragebogen (Weg A), Datenbank, Entwicklungsassistent | Weg B KI-Bildanalyse |
+| Bild-Infrastruktur (5A) + Motion (5B) + Legal/Favicon (5C) | Vergleichsmodus Datenbank |
+| Film-API-Pipeline, KI-Anreicherung | Restliche Unsplash-Bilder (gestaffelt) |
 
-Nächster Schritt: Bilder nachfüllen (`npm run data:seed:images -- --limit=2`); optional Weg B. Siehe [Dokumentation.md](Dokumentation.md).
+Nächste Session: Weg B + Vergleichsmodus. Siehe [Dokumentation.md](Dokumentation.md).
 
 ## Dokumentation
 
